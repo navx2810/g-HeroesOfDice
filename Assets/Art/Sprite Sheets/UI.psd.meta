@@ -67,10 +67,10 @@ TextureImporter:
         x: 16
         y: 16
         width: 16
-        height: 15
+        height: 16
       alignment: 0
       pivot: {x: .5, y: .5}
-      border: {x: 2, y: 3, z: 2, w: 2}
+      border: {x: 2, y: 3, z: 2, w: 3}
     - name: s_b_a_u
       rect:
         serializedVersion: 2
