@@ -10,6 +10,7 @@ TextureImporter:
     21300010: s_p_b_f
     21300012: s_p_b_s
     21300014: i_menu
+    21300016: hB
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -121,5 +122,15 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 3, y: 3, z: 5, w: 3}
+    - name: hB
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
