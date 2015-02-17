@@ -11,6 +11,7 @@ public class Dice : MonoBehaviour
 				touchingSide;
 
 		private Vector3 startingPosition;
+		public Transform floor; 
 	
 		// Use this for initialization
 		void Start ()
@@ -18,30 +19,48 @@ public class Dice : MonoBehaviour
 				sides = GetComponentsInChildren<DiceSide> ();
 				startingPosition = transform.position;				// Until I can control this better
 				Roll ();
+		
 		}
 	
 		// Update is called once per frame
 		void Update ()
 		{
-				if (Input.GetKeyUp (KeyCode.A))
+				if (Input.GetKeyUp (KeyCode.A)) {
+						StopAllCoroutines ();
 						Roll ();
+				}
+						
 		}
+
+//		IEnumerator CheckSidesForCollision (float seconds)
+//		{
+//				yield return new WaitForSeconds (seconds);
+//				Debug.Log ("Checking for dice sides");
+//				if (rigidbody.velocity.magnitude == 0) {
+//						if (touchingSide == null) {
+//								StopAllCoroutines ();
+//								StartCoroutine (CheckSidesForCollision (7f));
+//						}
+//				} else {
+//						StopAllCoroutines ();
+//						StartCoroutine (CheckSidesForCollision (5f));
+//				}	
+//		}
 
 		IEnumerator CheckSidesForCollision (float seconds)
 		{
 				yield return new WaitForSeconds (seconds);
-				Debug.Log ("Checking for dice sides");
 				if (rigidbody.velocity.magnitude == 0) {
-						if (touchingSide == null) {
-								StopAllCoroutines ();
+						if (touchingSide != null && Vector3.Dot (touchingSide.transform.forward, floor.transform.up) <= -.99f)
+								Debug.Log ("Side is touching");
+						else {
+								//Debug.Log (Vector3.Dot (touchingSide.transform.forward, floor.transform.up));
+								ShootUp ();
+								touchingSide = null;
+								StopCoroutine (CheckSidesForCollision (7f));
 								StartCoroutine (CheckSidesForCollision (7f));
 						}
-				} else {
-						rigidbody.AddForce (Vector3.up * 500f);
-						rigidbody.AddTorque (Vector3.right * 200f);
-						StopAllCoroutines ();
-						StartCoroutine (CheckSidesForCollision (5f));
-				}	
+				}
 		}
 
 		void Roll ()
@@ -51,5 +70,12 @@ public class Dice : MonoBehaviour
 				StopCoroutine (CheckSidesForCollision (7f));
 				StartCoroutine (CheckSidesForCollision (7f));
 		}
+
+		public void ShootUp ()
+		{
+				rigidbody.AddForce (Vector3.up * 500f);
+				rigidbody.AddTorque (Vector3.right * 200f);
+		}
+
 
 }
