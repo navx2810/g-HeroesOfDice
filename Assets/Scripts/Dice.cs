@@ -8,7 +8,7 @@ public class Dice : MonoBehaviour
 				sides;
 		[SerializeField]
 		public DiceSide
-				touchingSide;
+				touchingSide, upSide;
 
 		private Vector3 startingPosition;
 		public Transform floor; 
@@ -17,7 +17,8 @@ public class Dice : MonoBehaviour
 		void Start ()
 		{
 				sides = GetComponentsInChildren<DiceSide> ();
-				startingPosition = transform.position;				// Until I can control this better
+				startingPosition = transform.position;
+				upSide = null;
 				Roll ();
 		
 		}
@@ -52,7 +53,10 @@ public class Dice : MonoBehaviour
 				yield return new WaitForSeconds (seconds);
 				if (rigidbody.velocity.magnitude == 0) {
 						if (touchingSide != null && Vector3.Dot (touchingSide.transform.forward, floor.transform.up) <= -.99f)
-								Debug.Log ("Side is touching");
+								foreach (DiceSide side in sides) {
+										if (Vector3.Dot (side.transform.forward, floor.transform.up) >= .99f)
+												upSide = side;
+								}
 						else {
 								//Debug.Log (Vector3.Dot (touchingSide.transform.forward, floor.transform.up));
 								ShootUp ();
