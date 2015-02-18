@@ -20,16 +20,16 @@ public class DiceSide : MonoBehaviour
 	
 		}
 
-		void OnTriggerEnter (Collider collider)
-		{
-				if (!(collider is DiceSide))
-				if (collider.CompareTag ("Floor"))
-						parentDice.touchingSide = this;
-		}
-
-		void OnCollisionExit ()
-		{
-				parentDice.touchingSide = null;
-		}
+//		void OnTriggerEnter (Collider collider)
+//		{
+//				if (!(collider is DiceSide))
+//				if (collider.CompareTag ("Floor"))
+//						parentDice.touchingSide = this;
+//		}
+//
+//		void OnCollisionExit ()
+//		{
+//				parentDice.touchingSide = null;
+//		}
 
 }
