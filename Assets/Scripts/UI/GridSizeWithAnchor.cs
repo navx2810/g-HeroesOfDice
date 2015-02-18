@@ -8,8 +8,6 @@ public class GridSizeWithAnchor : MonoBehaviour
 		public GridLayoutGroup gLG;
 		public float width;
 		
-		
-		// Use this for initialization
 		void Start ()
 		{
 				rT = GetComponent<RectTransform> ();
@@ -20,10 +18,8 @@ public class GridSizeWithAnchor : MonoBehaviour
 	
 		void OnRectTransformDimensionsChange ()
 		{
-				try {
+				if (rT != null && gLG != null)
 						gLG.cellSize = new Vector2 (rT.rect.width, gLG.cellSize.y);
-				} catch (UnassignedReferenceException uRE) {
-				}
 		}
 
 }
