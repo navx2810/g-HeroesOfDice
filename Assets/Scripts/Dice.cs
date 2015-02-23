@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Dice : MonoBehaviour
 {
+
+		public DiceModel diceModel;
 		[SerializeField]
 		public DiceSide[]
 				sides;

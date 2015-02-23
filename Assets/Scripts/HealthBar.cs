@@ -6,7 +6,7 @@ public class HealthBar : MonoBehaviour
 {
 
 		public Slider slider;
-
+		
 		// Use this for initialization
 		void Start ()
 		{
