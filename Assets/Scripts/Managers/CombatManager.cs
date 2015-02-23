@@ -7,6 +7,9 @@ public class CombatManager : MonoBehaviour
 		public Dice[] partyDice, enemyDice;
 		public Dice selectedDice;
 
+		public DicePanel heroPanel, enemyPanel;
+		public AbilityPanel abilityPanel;
+
 		public enum SelectionFilter
 		{
 				PARTY,
