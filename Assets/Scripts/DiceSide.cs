@@ -6,12 +6,10 @@ public class DiceSide : MonoBehaviour
 		[SerializeField]
 		private string
 				sideName;
-		private Dice parentDice;
 
 		// Use this for initialization
 		void Start ()
 		{
-				parentDice = GetComponentInParent<Dice> ();
 		}
 	
 		// Update is called once per frame
