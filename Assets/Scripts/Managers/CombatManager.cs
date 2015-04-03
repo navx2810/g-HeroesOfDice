@@ -7,6 +7,9 @@ public class CombatManager : MonoBehaviour
 		public Dice[] partyDice, enemyDice;
 		public Dice selectedDice;
 
+		public DicePanel heroPanel, enemyPanel;
+		public AbilityPanel abilityPanel;
+
 		public enum SelectionFilter
 		{
 				PARTY,
@@ -19,6 +22,7 @@ public class CombatManager : MonoBehaviour
 		void Start ()
 		{
 				selectedDice = null;
+				Init ();
 		}
 	
 		// Update is called once per frame
@@ -33,8 +37,23 @@ public class CombatManager : MonoBehaviour
 				this.enemyDice = enemyDice;
 		}
 
+		public void Init ()
+		{
+				DiceModel[] models = new DiceModel[3];
+				for (int x = 0; x < 3; x++)
+						models [x] = partyDice [x].diceModel;
+
+				heroPanel.Init (models);
+				for (int x = 0; x < 3; x++)
+						models [x] = enemyDice [x].diceModel;
+				enemyPanel.Init (models);
+		}
+
+
 		public void DisplaySelection (SelectionFilter filter)
 		{
+				// Enable the Catch Events Panel
+				// Add the children of the buttons to the catch events panel
 				// Toggle all selection buttons on items that match filter
 				// Check for a click
 				// Get object from click
