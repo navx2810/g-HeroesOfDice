@@ -86,8 +86,8 @@ public class Dice : MonoBehaviour
 
 		public void ShootUp ()
 		{
-				rigidbody.AddForce (Vector3.up * 500f);
-				rigidbody.AddTorque (Vector3.right * 200f);
+				GetComponent<Rigidbody>().AddForce (Vector3.up * 500f);
+				GetComponent<Rigidbody>().AddTorque (Vector3.right * 200f);
 				touchingSide = null;
 				upSide = null;
 				collisionCheck.enabled = true;
