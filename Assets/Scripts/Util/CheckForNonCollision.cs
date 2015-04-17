@@ -1,4 +1,5 @@
 using HeroesOfDice.GameObjects;
+using HeroesOfDice.Managers;
 using UnityEngine;
 
 namespace HeroesOfDice.Util
@@ -34,6 +35,11 @@ namespace HeroesOfDice.Util
 
             if (dice.upSide == null)
                 dice.ShootUp();
+            else
+            {
+                dice.diceModel.UpSide = dice.diceModel.Abilities[dice.upSide.Index];
+                CombatManager.Instance.HasAbility.Add(dice.diceModel);
+            }
         }
     }
 }

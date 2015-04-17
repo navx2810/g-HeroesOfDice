@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using HeroesOfDice.GameObjects;
 using UnityEngine;
 
 namespace HeroesOfDice.Managers
@@ -19,7 +21,7 @@ namespace HeroesOfDice.Managers
             }
         }
 
-        void Awake()
+        public void Awake()
         {
             if (_instance == null)
             {
@@ -37,6 +39,24 @@ namespace HeroesOfDice.Managers
         public BDice Defender { get; set; }
         public BDice[] PlayersParty { get; set; }
         public BDice[] EnemyParty { get; set; }
+            
+         [SerializeField]
+        private Dice[] _partyDice;
+        public Dice[] PartyDiceObjects
+        {
+            get { return _partyDice; }
+            set { _partyDice = value; }
+        }
+        
+        [SerializeField]
+        private Dice[] _enemyDice;
+        public Dice[] EnemyDiceObjects
+        {
+            get { return _enemyDice; }
+            set { _enemyDice = value; }
+        }
+
+        public List<BDice> HasAbility { get; set; }
 
         public void HightlightSelection()
         {
@@ -51,5 +71,7 @@ namespace HeroesOfDice.Managers
             // When the Checkmark is pressed, link to this function
             Attacker.UseAbility();
         }
+
+        
     }
 }
