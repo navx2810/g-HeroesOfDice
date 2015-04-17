@@ -19,10 +19,17 @@ public class EmulateScenarioManager : MonoBehaviour {
 
         party[0].CurrentHealth = 5;
 
+        for (int x = 0; x < party.Length; x++)
+        {
+            party[x].DiceObject = CombatManager.Instance.PartyDiceObjects[x];
+            party[x].DiceObject.diceModel = party[x];
+            enemy[x].DiceObject = CombatManager.Instance.EnemyDiceObjects[x];
+            enemy[x].DiceObject.diceModel = enemy[x];
+        }
+
         CombatManager.Instance.PlayersParty = party;
         CombatManager.Instance.EnemyParty = enemy;
 
         MenuManager.Instance.CurrentState = MenuManager.Instance.States[0];
     }
-    
 }
