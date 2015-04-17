@@ -1,3 +1,4 @@
+using HeroesOfDice.GameObjects;
 using UnityEngine;
 
 namespace HeroesOfDice
@@ -11,6 +12,7 @@ namespace HeroesOfDice
         public int CurrentHealth { get; set; }
         public BSide[] Abilities { get; set; }
         public ETargetType TargetType { get; set; }
+        public Dice DiceObject { get; set; }
 
         /// <summary>
         /// Base Dice class
