@@ -22,6 +22,9 @@ namespace HeroesOfDice.GameObjects
         void Start ()
         {
             sides = GetComponentsInChildren<DiceSide> ();
+            for (int x = 0; x < sides.Length; x++)
+                sides[x].Index = x;
+
             startingPosition = transform.position;
             collisionCheck = GetComponent<CheckForNonCollision> ();
             upSide = null;
