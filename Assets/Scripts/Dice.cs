@@ -1,43 +1,44 @@
+using HeroesOfDice.Util;
 using UnityEngine;
-using System.Collections;
-using HeroesOfDice;
 
-public class Dice : MonoBehaviour
+namespace HeroesOfDice.GameObjects
 {
+    public class Dice : MonoBehaviour
+    {
 
-		public BDice diceModel;
-		[SerializeField]
-		public DiceSide[]
-				sides;
-		[SerializeField]
-		public DiceSide
-				touchingSide, upSide;
-		private CheckForNonCollision collisionCheck;
+        public BDice diceModel;
+        [SerializeField]
+        public DiceSide[]
+            sides;
+        [SerializeField]
+        public DiceSide
+            touchingSide, upSide;
+        private CheckForNonCollision collisionCheck;
 
-		private Vector3 startingPosition;
-		public Transform floor; 
+        private Vector3 startingPosition;
+        public Transform floor; 
 	
-		// Use this for initialization
-		void Start ()
-		{
-				sides = GetComponentsInChildren<DiceSide> ();
-				startingPosition = transform.position;
-				collisionCheck = GetComponent<CheckForNonCollision> ();
-				upSide = null;
-				touchingSide = null;
-				Roll ();
+        // Use this for initialization
+        void Start ()
+        {
+            sides = GetComponentsInChildren<DiceSide> ();
+            startingPosition = transform.position;
+            collisionCheck = GetComponent<CheckForNonCollision> ();
+            upSide = null;
+            touchingSide = null;
+            Roll ();
 		
-		}
+        }
 	
-		// Update is called once per frame
-		void Update ()
-		{
-				if (Input.GetKeyUp (KeyCode.A)) {
-						Roll ();
-				} else if (Input.GetKeyUp (KeyCode.Space))
-						ShootUp ();
+        // Update is called once per frame
+        void Update ()
+        {
+            if (Input.GetKeyUp (KeyCode.A)) {
+                Roll ();
+            } else if (Input.GetKeyUp (KeyCode.Space))
+                ShootUp ();
 						
-		}
+        }
 
 //		IEnumerator CheckSidesForCollision (float seconds)
 //		{
@@ -73,26 +74,27 @@ public class Dice : MonoBehaviour
 //				}
 //		}
 
-		void Roll ()
-		{
-				transform.position = startingPosition;
-				touchingSide = null;
-				upSide = null;
-				collisionCheck.enabled = true;
+        void Roll ()
+        {
+            transform.position = startingPosition;
+            touchingSide = null;
+            upSide = null;
+            collisionCheck.enabled = true;
 //				touchingSide = null;
 //				upSide = null;
 //				StopCoroutine (CheckSidesForCollision (7f));
 //				StartCoroutine (CheckSidesForCollision (7f));
-		}
+        }
 
-		public void ShootUp ()
-		{
-				GetComponent<Rigidbody>().AddForce (Vector3.up * 500f);
-				GetComponent<Rigidbody>().AddTorque (Vector3.right * 200f);
-				touchingSide = null;
-				upSide = null;
-				collisionCheck.enabled = true;
-		}
+        public void ShootUp ()
+        {
+            GetComponent<Rigidbody>().AddForce (Vector3.up * 500f);
+            GetComponent<Rigidbody>().AddTorque (Vector3.right * 200f);
+            touchingSide = null;
+            upSide = null;
+            collisionCheck.enabled = true;
+        }
 
 
+    }
 }
