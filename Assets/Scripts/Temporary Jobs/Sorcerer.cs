@@ -1,5 +1,3 @@
-using UnityEngine;
-using System.Collections;
 using HeroesOfDice;
 using HeroesOfDice.Abilities;
 using HeroesOfDice.Sides;

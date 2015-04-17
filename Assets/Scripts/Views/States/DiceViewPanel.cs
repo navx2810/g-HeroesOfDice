@@ -1,9 +1,8 @@
 using System;
-using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
 using HeroesOfDice;
 using HeroesOfDice.Managers;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class DiceViewPanel : BMenuState
 {

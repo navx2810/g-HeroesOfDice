@@ -1,6 +1,5 @@
-using UnityEngine;
-using System.Collections;
 using HeroesOfDice;
+using UnityEngine;
 
 public class MenuScreen : BMenuState
 {

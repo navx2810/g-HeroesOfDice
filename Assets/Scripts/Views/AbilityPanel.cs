@@ -1,8 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using HeroesOfDice;
-using HeroesOfDice.Managers;
 
 public class AbilityPanel : MonoBehaviour
 {

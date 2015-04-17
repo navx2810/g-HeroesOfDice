@@ -1,7 +1,6 @@
-using UnityEngine;
-using System.Collections;
 using HeroesOfDice;
 using HeroesOfDice.Managers;
+using UnityEngine;
 
 public class DicePanel : MonoBehaviour
 {

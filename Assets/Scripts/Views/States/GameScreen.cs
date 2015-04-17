@@ -1,5 +1,3 @@
-using UnityEngine;
-using System.Collections;
 using HeroesOfDice;
 
 public class GameScreen : BMenuState {
