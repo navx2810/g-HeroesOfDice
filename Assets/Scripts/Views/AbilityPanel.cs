@@ -4,11 +4,16 @@ using UnityEngine.UI;
 public class AbilityPanel : MonoBehaviour
 {
 
-    public Button[] abilityButtons;
+    public AbilityButton[] buttons;
 
 		// Use this for initialization
 		void Start ()
 		{
-				abilityButtons = GetComponentInChildren<RectTransform> ().GetComponentsInChildren<Button> ();
+                //abilityButtons = GetComponentInChildren<RectTransform> ().GetComponentsInChildren<Button> ();
+		    buttons = GetComponentInChildren<RectTransform>().GetComponentsInChildren<AbilityButton>();
 		}
+
+    public void UpdateView()
+    {
+    }
 }
