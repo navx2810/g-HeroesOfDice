@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using HeroesOfDice;
 
 public class Dice : MonoBehaviour
 {
 
-		public DiceModel diceModel;
+		public BDice diceModel;
 		[SerializeField]
 		public DiceSide[]
 				sides;
