@@ -4,9 +4,6 @@ namespace HeroesOfDice.GameObjects
 {
     public class DiceSide : MonoBehaviour
     {
-        [SerializeField]
-        private string
-            sideName;
-
+        public int Index { get; set; }
     }
 }

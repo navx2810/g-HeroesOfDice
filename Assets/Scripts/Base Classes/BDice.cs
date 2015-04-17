@@ -12,6 +12,7 @@ namespace HeroesOfDice
         public int CurrentHealth { get; set; }
         public BSide[] Abilities { get; set; }
         public ETargetType TargetType { get; set; }
+
         public Dice DiceObject { get; set; }
 
         /// <summary>
