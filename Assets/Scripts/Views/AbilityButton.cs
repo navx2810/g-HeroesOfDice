@@ -25,7 +25,7 @@ public class AbilityButton : MonoBehaviour
     public void SetModel(BDice m)
     {
         model = m;
-        button.interactable = true;
+        button.interactable = (m.UpSide.Ability.TargetType != ETargetType.None);
         abilityName.text = m.UpSide.Ability.Name;
     }
 
