@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using HeroesOfDice.GameObjects;
 using UnityEngine;
+using Debug = System.Diagnostics.Debug;
 
 namespace HeroesOfDice.Managers
 {
@@ -29,10 +30,10 @@ namespace HeroesOfDice.Managers
                 DontDestroyOnLoad(this);
             }
             else
-            {
                 if (this != _instance)
                     Destroy(gameObject);
-            }
+
+            HasAbility = new List<BDice>(6);
         }
 
         public BDice Attacker { get; set; }
@@ -63,7 +64,6 @@ namespace HeroesOfDice.Managers
             ETargetType type = Attacker.UpSide.Ability.TargetType;
             // Cycle through all dice and highlight those who match this target type
         }
-
         public void ConfirmSelection()
         {
             // Link this function to the GUI
@@ -72,6 +72,15 @@ namespace HeroesOfDice.Managers
             Attacker.UseAbility();
         }
 
-        
+        public void RegisterAbility(BDice dice)
+        {
+            HasAbility.Add(dice);
+            OnAbilityRegister(dice);
+        }
+
+        public delegate void NotifyChange(BDice dice);
+
+        public event NotifyChange OnAbilityRegister;
+        public event NotifyChange OnAbilityUnregister;
     }
 }
