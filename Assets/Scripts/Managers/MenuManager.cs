@@ -90,29 +90,19 @@ namespace HeroesOfDice.Managers
 
         public void CallHightlightSelection()
         {
-            if (CombatManager.Instance.Attacker.UpSide.Ability.TargetType == ETargetType.Ally)
-            {
-                foreach (var panel in _partyPanel)
-                    if (panel.model.TargetType == ETargetType.Ally)
-                    {
-                        // If model is not a target type of ally, disable them
-                        // If they are, change the onClick of the panel to link to the CombatManager and set the model as the defender
-                    }
-            }
-            else
-            {
-                foreach (var panel in _enemyPanel)
-                {
-                    // If model is not a target type of ally, disable them
-                    // If they are, change the onClick of the panel to link to the CombatManager and set the model as the defender
-                }
-            }
-
+            MoveToState(_states[3]);
         }
 
         public void CallGameScreen()
         {
             MoveToState(_states[0]);
+        }
+
+        public void MakeSelection(BDice model)
+        {
+            CallGameScreen();
+            CombatManager.Instance.Defender = model;
+            CombatManager.Instance.Attacker.UseAbility();
         }
     }
 }
