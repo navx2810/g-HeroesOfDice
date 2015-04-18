@@ -1,4 +1,5 @@
 using HeroesOfDice.GameObjects;
+using HeroesOfDice.Managers;
 using UnityEngine;
 
 namespace HeroesOfDice
@@ -25,7 +26,7 @@ namespace HeroesOfDice
             CurrentHealth = maxHealth;
         }
 
-        public void UseAbility() { UpSide.OnUse(); }
+        public void UseAbility() { UpSide.OnUse(); CombatManager.Instance.UnregisterAbility(this); }
         public void BeAttacked(int amount) { UpSide.OnHit(amount); }
         public void ModHealth(int amount)
         {
