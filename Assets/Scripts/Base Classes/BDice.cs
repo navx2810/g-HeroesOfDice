@@ -15,13 +15,6 @@ namespace HeroesOfDice
 
         public Dice DiceObject { get; set; }
 
-        /// <summary>
-        /// Base Dice class
-        /// </summary>
-        /// <param name="name">the name of the dice</param>
-        /// <param name="job">the job "class" of the dice</param>
-        /// <param name="maxHealth">the maximum health for the dice</param>
-        /// <param name="targetType">the target type of the dice</param>
         public BDice(string name, string job, int maxHealth, ETargetType targetType)
         {
             Name = name;
@@ -32,25 +25,25 @@ namespace HeroesOfDice
             CurrentHealth = maxHealth;
         }
 
-        /// <summary>
-        /// the method for using the UpSides ability. This stands for both an attack or a usability ability like 'Heal'
-        /// </summary>
         public void UseAbility() { UpSide.OnUse(); }
         public void BeAttacked(int amount) { UpSide.OnHit(amount); }
-
-        /// <summary>
-        /// the method for modifying the dice's current health.
-        /// </summary>
-        /// <param name="amount">the amount the current health will be modified by. The value can be negative denoting this was an attack.</param>
         public void ModHealth(int amount)
         {
             CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0, MaxHealth);
+            if (OnHealthChange != null) OnHealthChange(this);
             IsDead();
         }
 
+        public delegate void NotifyChange(BDice dice);
+        public event NotifyChange OnHealthChange;
+        public event NotifyChange OnDead;
+
         public bool IsDead()
         {
-            return (CurrentHealth == 0) ? true : false;
+            if (CurrentHealth > 0)
+                return false;
+            if (OnDead != null) OnDead(this);
+            return true;
         }
     }
 }
