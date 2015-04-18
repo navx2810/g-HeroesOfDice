@@ -72,6 +72,21 @@ namespace HeroesOfDice.Managers
             OnAbilityRegister(dice);
 
             // TODO: add check to see if all abilities do not have the target type of None, otherwise the turn would end
+            if (HasAbility.Count == PlayersParty.Length)
+            {
+                bool allNone = true;
+                foreach (var d in HasAbility)
+                    if (d.UpSide.Ability.TargetType != ETargetType.None)
+                        allNone = false;
+                if (allNone) { }
+                    //End turn
+            }
+        }
+
+        public void UnregisterAbility(BDice dice)
+        {
+            HasAbility.Remove(dice);
+            OnAbilityUnregister(dice);
         }
 
         public delegate void NotifyChange(BDice dice);
