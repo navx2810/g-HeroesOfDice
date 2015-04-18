@@ -45,7 +45,21 @@ namespace HeroesOfDice.Managers
         }
 
         [SerializeField]
-        private EntityPanel[] _partyPanel, _enemyPanel;
+        private EntityPanel[] _partyPanel;
+
+        public EntityPanel[] PartyPanel
+        {
+            get { return _partyPanel; }
+            set { _partyPanel = value; }
+        }
+
+        [SerializeField]
+        private EntityPanel[] _enemyPanel;
+        public EntityPanel[] EnemyPanel
+        {
+            get { return _enemyPanel; }
+            set { _enemyPanel = value; }
+        }
 
         [SerializeField]
         private Color _newColor;
