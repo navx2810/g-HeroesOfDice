@@ -17,7 +17,7 @@ public class EntityPanel : MonoBehaviour
 
     public void Init()
     {
-        GetComponent<Button>().onClick.AddListener(Click);
+        button.onClick.AddListener(Click);
         nameLabel.text = model.Name;
         healthBar.maxValue = model.MaxHealth;
         healthBar.minValue = 0;
