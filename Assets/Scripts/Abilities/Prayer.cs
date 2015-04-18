@@ -4,7 +4,8 @@ namespace HeroesOfDice.Abilities
 {
     public class Prayer : BAbility
     {
-        public Prayer(string name, string description, int power, float baseModifier, float critModifier, ETargetType targetType) : base(name, description, power, baseModifier, critModifier, targetType)
+        public Prayer(string name, string description, int power, float baseModifier, float critModifier, ETargetType targetType)
+            : base(name, description, power, baseModifier, critModifier, targetType)
         {
         }
 

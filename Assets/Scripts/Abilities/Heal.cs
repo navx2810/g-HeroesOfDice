@@ -9,7 +9,8 @@ namespace HeroesOfDice.Abilities
         {
         }
 
-        public Heal() : base("Heal", "Restore the health of an ally!", 4, 1f, 1.25f, ETargetType.Ally)
+        public Heal()
+            : base("Heal", "Restore the health of an ally!", 4, 1f, 1.25f, ETargetType.Ally)
         {
         }
 

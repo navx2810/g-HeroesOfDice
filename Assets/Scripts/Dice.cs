@@ -16,83 +16,85 @@ namespace HeroesOfDice.GameObjects
         private CheckForNonCollision collisionCheck;
 
         private Vector3 startingPosition;
-        public Transform floor; 
-	
+        public Transform floor;
+
         // Use this for initialization
-        void Start ()
+        public void Start()
         {
-            sides = GetComponentsInChildren<DiceSide> ();
+            sides = GetComponentsInChildren<DiceSide>();
             for (int x = 0; x < sides.Length; x++)
                 sides[x].Index = x;
 
             startingPosition = transform.position;
-            collisionCheck = GetComponent<CheckForNonCollision> ();
+            collisionCheck = GetComponent<CheckForNonCollision>();
             upSide = null;
             touchingSide = null;
-            Roll ();
-		
+            Roll();
+
         }
-	
+
         // Update is called once per frame
-        void Update ()
+        public void Update()
         {
-            if (Input.GetKeyUp (KeyCode.A)) {
-                Roll ();
-            } else if (Input.GetKeyUp (KeyCode.Space))
-                ShootUp ();
-						
+            if (Input.GetKeyUp(KeyCode.A))
+            {
+                Roll();
+            }
+            else if (Input.GetKeyUp(KeyCode.Space))
+                ShootUp();
+
         }
 
-//		IEnumerator CheckSidesForCollision (float seconds)
-//		{
-//				yield return new WaitForSeconds (seconds);
-//				Debug.Log ("Checking for dice sides");
-//				if (rigidbody.velocity.magnitude == 0) {
-//						if (touchingSide == null) {
-//								StopAllCoroutines ();
-//								StartCoroutine (CheckSidesForCollision (7f));
-//						}
-//				} else {
-//						StopAllCoroutines ();
-//						StartCoroutine (CheckSidesForCollision (5f));
-//				}	
-//		}
+        //		IEnumerator CheckSidesForCollision (float seconds)
+        //		{
+        //				yield return new WaitForSeconds (seconds);
+        //				Debug.Log ("Checking for dice sides");
+        //				if (rigidbody.velocity.magnitude == 0) {
+        //						if (touchingSide == null) {
+        //								StopAllCoroutines ();
+        //								StartCoroutine (CheckSidesForCollision (7f));
+        //						}
+        //				} else {
+        //						StopAllCoroutines ();
+        //						StartCoroutine (CheckSidesForCollision (5f));
+        //				}	
+        //		}
 
-//		IEnumerator CheckSidesForCollision (float seconds)
-//		{
-//				yield return new WaitForSeconds (seconds);
-//				if (rigidbody.velocity.magnitude == 0) {
-//						if (touchingSide != null && Vector3.Dot (touchingSide.transform.forward, floor.up) <= -.99f)
-//								foreach (DiceSide side in sides) {
-//										if (Vector3.Dot (side.transform.forward, floor.up) >= .99f)
-//												upSide = side;
-//								}
-//						else {
-//								//Debug.Log (Vector3.Dot (touchingSide.transform.forward, floor.transform.up));
-//								ShootUp ();
-//								touchingSide = null;
-//								StopCoroutine (CheckSidesForCollision (7f));
-//								StartCoroutine (CheckSidesForCollision (7f));
-//						}
-//				}
-//		}
+        //		IEnumerator CheckSidesForCollision (float seconds)
+        //		{
+        //				yield return new WaitForSeconds (seconds);
+        //				if (rigidbody.velocity.magnitude == 0) {
+        //						if (touchingSide != null && Vector3.Dot (touchingSide.transform.forward, floor.up) <= -.99f)
+        //								foreach (DiceSide side in sides) {
+        //										if (Vector3.Dot (side.transform.forward, floor.up) >= .99f)
+        //												upSide = side;
+        //								}
+        //						else {
+        //								//Debug.Log (Vector3.Dot (touchingSide.transform.forward, floor.transform.up));
+        //								ShootUp ();
+        //								touchingSide = null;
+        //								StopCoroutine (CheckSidesForCollision (7f));
+        //								StartCoroutine (CheckSidesForCollision (7f));
+        //						}
+        //				}
+        //		}
 
-        void Roll ()
+        void Roll()
         {
             transform.position = startingPosition;
             touchingSide = null;
             upSide = null;
             collisionCheck.enabled = true;
-//				touchingSide = null;
-//				upSide = null;
-//				StopCoroutine (CheckSidesForCollision (7f));
-//				StartCoroutine (CheckSidesForCollision (7f));
+            //				touchingSide = null;
+            //				upSide = null;
+            //				StopCoroutine (CheckSidesForCollision (7f));
+            //				StartCoroutine (CheckSidesForCollision (7f));
         }
 
-        public void ShootUp ()
+        public void ShootUp()
         {
-            GetComponent<Rigidbody>().AddForce (Vector3.up * 500f);
-            GetComponent<Rigidbody>().AddTorque (Vector3.right * 200f);
+            GetComponent<Rigidbody>().AddForce(Vector3.up * 500f);
+            GetComponent<Rigidbody>().AddTorque(Vector3.right * 200f);
             touchingSide = null;
             upSide = null;
             collisionCheck.enabled = true;

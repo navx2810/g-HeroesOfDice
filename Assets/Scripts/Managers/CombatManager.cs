@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using HeroesOfDice.GameObjects;
 using UnityEngine;
-using Debug = System.Diagnostics.Debug;
 
 namespace HeroesOfDice.Managers
 {

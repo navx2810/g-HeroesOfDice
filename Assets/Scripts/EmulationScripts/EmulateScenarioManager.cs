@@ -3,8 +3,7 @@ using HeroesOfDice.Managers;
 using UnityEngine;
 
 public class EmulateScenarioManager : MonoBehaviour {
-
-    void Awake()
+    public void Awake()
     {
 
         BDice[] party = new BDice[3];

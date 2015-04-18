@@ -29,5 +29,5 @@ public class EntityPanel : MonoBehaviour
         MenuManager.Instance.SelectedModel = model;
         MenuManager.Instance.CallDiceViewOpen();
     }
-	    
+
 }

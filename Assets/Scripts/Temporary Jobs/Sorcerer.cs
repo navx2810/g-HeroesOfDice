@@ -2,8 +2,10 @@ using HeroesOfDice;
 using HeroesOfDice.Abilities;
 using HeroesOfDice.Sides;
 
-public class Sorcerer : BDice {
-    public Sorcerer(string name, int maxHealth, ETargetType targetType) : base(name, "Sorcerer", maxHealth, targetType)
+public class Sorcerer : BDice
+{
+    public Sorcerer(string name, int maxHealth, ETargetType targetType)
+        : base(name, "Sorcerer", maxHealth, targetType)
     {
         Abilities[0] = new Regular(new DragonsBreath());
         Abilities[1] = new Regular(new IceBeam());

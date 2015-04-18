@@ -13,7 +13,7 @@ public class DiceViewPanel : BMenuState
 
     public override void OnEnter()
     {
-       var model = MenuManager.Instance.SelectedModel;
+        var model = MenuManager.Instance.SelectedModel;
 
         catcher.SetActive(true);
         nameText.text = model.Name;

@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace HeroesOfDice.Util
 {
-   public class RandomRotation : MonoBehaviour
+    public class RandomRotation : MonoBehaviour
     {
-        void Start()
+        public void Start()
         {
             float x = Random.Range(0, 360f);
             float y = Random.Range(0, 360f);

@@ -10,18 +10,18 @@ namespace HeroesOfDice.Util
         public Rigidbody _rigidbody;
         public Dice dice;
 
-        void Awake()
+        public void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
             dice = GetComponent<Dice>();
         }
 
-        void Update()
+        public void Update()
         {
             if (_rigidbody.velocity.magnitude <= 0)
             {
                 CheckSides();
-                this.enabled = false;
+                enabled = false;
             }
         }
 

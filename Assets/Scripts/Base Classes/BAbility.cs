@@ -5,7 +5,7 @@ namespace HeroesOfDice
 {
     public abstract class BAbility
     {
-        
+
         public string Name { get; set; }
         public string Description { get; set; }
         public int Power { get; set; }
@@ -26,7 +26,7 @@ namespace HeroesOfDice
 
         public int CalculatePower()
         {
-            return Mathf.CeilToInt(Power*BaseModifier);
+            return Mathf.CeilToInt(Power * BaseModifier);
         }
 
         public abstract void Use();

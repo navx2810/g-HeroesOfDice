@@ -1,7 +1,6 @@
 using HeroesOfDice;
 using HeroesOfDice.Managers;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class AbilityPanel : MonoBehaviour
 {
@@ -10,7 +9,7 @@ public class AbilityPanel : MonoBehaviour
     
 
     // Use this for initialization
-    void Start()
+    public void Start()
     {
         //abilityButtons = GetComponentInChildren<RectTransform> ().GetComponentsInChildren<Button> ();
         buttons = GetComponentInChildren<RectTransform>().GetComponentsInChildren<AbilityButton>();

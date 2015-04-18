@@ -5,7 +5,8 @@ namespace HeroesOfDice.Sides
     public class Evade : BSide
     {
         public float EvadeChance { get; set; }
-        public Evade(BAbility ability, float evadeChance) : base(ability)
+        public Evade(BAbility ability, float evadeChance)
+            : base(ability)
         {
             EvadeChance = evadeChance;
         }
@@ -14,7 +15,7 @@ namespace HeroesOfDice.Sides
         {
             if (Random.Range(0f, 1f) > EvadeChance)
                 base.OnHit(amount);
-           
+
         }
     }
 }

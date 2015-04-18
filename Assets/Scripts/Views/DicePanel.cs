@@ -5,11 +5,11 @@ using UnityEngine;
 public class DicePanel : MonoBehaviour
 {
 
-		public EntityPanel[] entityPanel;
+    public EntityPanel[] entityPanel;
     public bool isPlayer;
 
-		// Use this for initialization
-    private void Awake()
+    // Use this for initialization
+    public void Awake()
     {
         entityPanel = GetComponentsInChildren<EntityPanel>();
     }
@@ -24,5 +24,5 @@ public class DicePanel : MonoBehaviour
             entityPanel[x].Init();
         }
     }
-	
+
 }
