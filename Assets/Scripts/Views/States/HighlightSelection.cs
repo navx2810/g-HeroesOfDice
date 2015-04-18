@@ -8,8 +8,11 @@ using UnityEngine.UI;
 public class HighlightSelection : BMenuState
 {
 
+    public GameObject catcher;
+
     public override void OnEnter()
     {
+        catcher.SetActive(true);
         List<EntityPanel> panels = new List<EntityPanel>();
 
         panels.AddRange(MenuManager.Instance.PartyPanel);
@@ -35,6 +38,7 @@ public class HighlightSelection : BMenuState
 
     public override void OnLeave()
     {
+        catcher.SetActive(false);
         // Reset the panel
         List<EntityPanel> panels = new List<EntityPanel>();
         panels.AddRange(MenuManager.Instance.PartyPanel);
