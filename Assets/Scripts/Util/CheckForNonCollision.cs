@@ -38,7 +38,7 @@ namespace HeroesOfDice.Util
             else
             {
                 dice.diceModel.UpSide = dice.diceModel.Abilities[dice.upSide.Index];
-                CombatManager.Instance.HasAbility.Add(dice.diceModel);
+                CombatManager.Instance.RegisterAbility(dice.diceModel);
             }
         }
     }
