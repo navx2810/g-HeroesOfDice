@@ -22,6 +22,7 @@ public class DicePanel : MonoBehaviour
         {
             entityPanel[x].model = party[x];
             entityPanel[x].Init();
+            party[x].OnHealthChange += entityPanel[x].OnHealthChange;
         }
     }
 
