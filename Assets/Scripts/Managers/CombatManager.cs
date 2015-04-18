@@ -58,11 +58,6 @@ namespace HeroesOfDice.Managers
 
         public List<BDice> HasAbility { get; set; }
 
-        public void HightlightSelection()
-        {
-            ETargetType type = Attacker.UpSide.Ability.TargetType;
-            // Cycle through all dice and highlight those who match this target type
-        }
         public void ConfirmSelection()
         {
             // Link this function to the GUI
