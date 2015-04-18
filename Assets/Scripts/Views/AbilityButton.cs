@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using HeroesOfDice;
+using HeroesOfDice.Managers;
 using UnityEngine.UI;
 
 public class AbilityButton : MonoBehaviour
@@ -9,14 +10,25 @@ public class AbilityButton : MonoBehaviour
     public Button button;
     public Text abilityName;
 
+    public void Start()
+    {
+        button.onClick.AddListener(Click);
+    }
+
     public void Flush()
     {
         model = null;
     }
 
-    public void SetModel(BDice model)
+    public void SetModel(BDice m)
     {
-        this.model = model;
-        abilityName.text = model.UpSide.Ability.Name;
+        this.model = m;
+        abilityName.text = m.UpSide.Ability.Name;
+    }
+
+    public void Click()
+    {
+        CombatManager.Instance.Attacker = model;
+        MenuManager.Instance.CallHightlightSelection();
     }
 }
