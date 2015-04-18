@@ -6,7 +6,8 @@ namespace HeroesOfDice.Abilities
         {
         }
 
-        public LightningBolt() : base("Lightning Bolt", "Zap!", 5, 1f, 1.5f, ETargetType.Enemy)
+        public LightningBolt()
+            : base("Lightning Bolt", "Zap", 5, 1f, 1.5f, ETargetType.Enemy)
         {
         }
 
