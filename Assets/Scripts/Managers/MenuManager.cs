@@ -19,7 +19,7 @@ namespace HeroesOfDice.Managers
             }
         }
 
-        void Awake()
+        public void Awake()
         {
             if (_instance == null)
             {
@@ -44,6 +44,12 @@ namespace HeroesOfDice.Managers
             set { _states = value; }
         }
 
+        [SerializeField]
+        private EntityPanel[] _partyPanel, _enemyPanel;
+
+        [SerializeField]
+        private Color _newColor;
+
         public void MoveToState(BMenuState state)
         {
             CurrentState.OnLeave();
@@ -67,7 +73,28 @@ namespace HeroesOfDice.Managers
         {
             MoveToState(_states[2]);
         }
-        public void CallHightlightSelection() { }
+
+        public void CallHightlightSelection()
+        {
+            if (CombatManager.Instance.Attacker.UpSide.Ability.TargetType == ETargetType.Ally)
+            {
+                foreach (var panel in _partyPanel)
+                    if (panel.model.TargetType == ETargetType.Ally)
+                    {
+                        // If model is not a target type of ally, disable them
+                        // If they are, change the onClick of the panel to link to the CombatManager and set the model as the defender
+                    }
+            }
+            else
+            {
+                foreach (var panel in _enemyPanel)
+                {
+                    // If model is not a target type of ally, disable them
+                    // If they are, change the onClick of the panel to link to the CombatManager and set the model as the defender
+                }
+            }
+
+        }
 
         public void CallGameScreen()
         {
