@@ -23,7 +23,8 @@ public class HighlightSelection : BMenuState
             if (panel.model.TargetType == abiltiesTargetType)
             {
                 panel.button.onClick.RemoveAllListeners();
-                panel.button.onClick.AddListener(() => MenuManager.Instance.MakeSelection(panel.model));
+                var panel1 = panel;
+                panel.button.onClick.AddListener(() => MenuManager.Instance.MakeSelection(panel1.model));
                 // If model is not a target type of ally, disable them
                 // If they are, change the onClick of the panel to link to the CombatManager and set the model as the defender
             }
