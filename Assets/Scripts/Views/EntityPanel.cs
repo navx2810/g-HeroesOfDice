@@ -10,7 +10,8 @@ public class EntityPanel : MonoBehaviour
     public Slider healthBar;
     public Button button;
 
-    public void OnHealthChange()
+    // todo: Removed the reference to BDice in this method
+    public void OnHealthChange(BDice m)
     {
         healthBar.value = model.CurrentHealth;
     }
@@ -29,5 +30,10 @@ public class EntityPanel : MonoBehaviour
         MenuManager.Instance.SelectedModel = model;
         MenuManager.Instance.CallDiceViewOpen();
     }
+
+
+    
+
+
 
 }
