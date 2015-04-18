@@ -75,6 +75,8 @@ namespace HeroesOfDice.Managers
         {
             HasAbility.Add(dice);
             OnAbilityRegister(dice);
+
+            // TODO: add check to see if all abilities do not have the target type of None, otherwise the turn would end
         }
 
         public delegate void NotifyChange(BDice dice);
