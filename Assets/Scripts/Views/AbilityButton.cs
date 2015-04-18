@@ -18,11 +18,15 @@ public class AbilityButton : MonoBehaviour
     public void Flush()
     {
         model = null;
+        button.interactable = false;
+        abilityName.text = "";
+
     }
 
     public void SetModel(BDice m)
     {
-        this.model = m;
+        model = m;
+        button.interactable = true;
         abilityName.text = m.UpSide.Ability.Name;
     }
 
