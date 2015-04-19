@@ -6,7 +6,8 @@ public class AbilityPanel : MonoBehaviour
 {
 
     public AbilityButton[] buttons;
-    
+    public ETargetType panelType;
+
 
     // Use this for initialization
     public void Start()
@@ -29,17 +30,19 @@ public class AbilityPanel : MonoBehaviour
 
     public void AddToView(BDice dice)
     {
-        for(int x = 0; x < buttons.Length; x++)
-            if (buttons[x].model == null)
-            {
-                buttons[x].SetModel(dice);
-                break;
-            }
+        if (dice.TargetType == panelType)
+            for (int x = 0; x < buttons.Length; x++)
+                if (buttons[x].model == null || buttons[x].model == dice)
+                {
+                    buttons[x].SetModel(dice);
+
+                    break;
+                }
     }
 
     public void RemoveFromView(BDice dice)
     {
-        for(int x = 0; x < buttons.Length; x++)
+        for (int x = 0; x < buttons.Length; x++)
             if (buttons[x].model == dice)
             {
                 buttons[x].Flush();
