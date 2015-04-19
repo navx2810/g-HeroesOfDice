@@ -1,8 +1,7 @@
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using HeroesOfDice;
 using HeroesOfDice.Managers;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class HighlightSelection : BMenuState

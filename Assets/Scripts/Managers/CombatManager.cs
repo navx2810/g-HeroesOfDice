@@ -35,12 +35,14 @@ namespace HeroesOfDice.Managers
 
             PlayerAbilities = new Dictionary<BDice, BAbility>(3);
             EnemyAbilities = new Dictionary<BDice, BAbility>(3);
+            IsPlayersTurn = true;
         }
 
         public BDice Attacker { get; set; }
         public BDice Defender { get; set; }
         public BDice[] PlayersParty { get; set; }
         public BDice[] EnemyParty { get; set; }
+        public bool IsPlayersTurn { get; set; }
 
         [SerializeField]
         private Dice[] _partyDice;
