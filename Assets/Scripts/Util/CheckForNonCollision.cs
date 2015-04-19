@@ -21,7 +21,7 @@ namespace HeroesOfDice.Util
             if (_rigidbody.velocity.magnitude <= 0)
             {
                 CheckSides();
-                enabled = false;
+                //enabled = false;
             }
         }
 
@@ -39,6 +39,7 @@ namespace HeroesOfDice.Util
             {
                 dice.diceModel.UpSide = dice.diceModel.Abilities[dice.upSide.Index];
                 CombatManager.Instance.RegisterAbility(dice.diceModel);
+                enabled = false;
             }
         }
     }
