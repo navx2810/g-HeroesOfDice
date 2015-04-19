@@ -101,6 +101,10 @@ namespace HeroesOfDice.Managers
         public void MakeSelection(BDice model)
         {
             CallGameScreen();
+
+            if (model.UpSide == null)
+                return;
+
             CombatManager.Instance.Defender = model;
             CombatManager.Instance.Attacker.UseAbility();
         }
