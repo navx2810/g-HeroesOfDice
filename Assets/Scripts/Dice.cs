@@ -100,6 +100,5 @@ namespace HeroesOfDice.GameObjects
             collisionCheck.enabled = true;
         }
 
-
     }
 }

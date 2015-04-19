@@ -108,7 +108,7 @@ namespace HeroesOfDice.Managers
         }
 
         public delegate void NotifyChange(BDice dice);
-
+        
         public event NotifyChange OnAbilityRegister;
         public event NotifyChange OnAbilityUnregister;
     }
