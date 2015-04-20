@@ -1,18 +1,19 @@
 using System.Collections.Generic;
 using HeroesOfDice.Managers;
+using UnityEngine;
 
 namespace HeroesOfDice
 {
-    public abstract class BAi
+    public abstract class BAi : MonoBehaviour
     {
-        public SortedDictionary<BDice, int> ThreatSheet { get; set; }
-        public SortedDictionary<BDice, int> HelpSheet { get; set; }
+        public BDice[] ThreatSheet { get; set; }
+        public BDice[] HelpSheet { get; set; }
         public BDice[] Party { get; set; }
 
         protected BAi()
         {
-            ThreatSheet = new SortedDictionary<BDice, int>();
-            HelpSheet = new SortedDictionary<BDice, int>();
+            ThreatSheet = CombatManager.Instance.PlayersParty;
+            HelpSheet = CombatManager.Instance.EnemyParty;
             Party = CombatManager.Instance.EnemyParty;
         }
 
