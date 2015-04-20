@@ -6,19 +6,19 @@ namespace HeroesOfDice
 {
     public abstract class BAi : MonoBehaviour
     {
-        public BDice[] ThreatSheet { get; set; }
-        public BDice[] HelpSheet { get; set; }
-        public BDice[] Party { get; set; }
+        public List<BDice> ThreatSheet { get; set; }
+        public List<BDice> HelpSheet { get; set; }
+        //public List<BDice> Party { get; set; }
 
         protected BAi()
         {
-            ThreatSheet = CombatManager.Instance.PlayersParty;
-            HelpSheet = CombatManager.Instance.EnemyParty;
-            Party = CombatManager.Instance.EnemyParty;
+            ThreatSheet = new List<BDice>(CombatManager.Instance.PlayersParty);
+            HelpSheet = new List<BDice>(CombatManager.Instance.EnemyParty);
+            //Party = new List<BDice>(CombatManager.Instance.EnemyParty);                 // todo: this is redundant
         }
 
         public abstract void DoAction();
-
+        public abstract void PopulateSheets();
     }
 }
 
