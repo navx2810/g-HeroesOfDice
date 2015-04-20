@@ -1,5 +1,6 @@
 using HeroesOfDice;
 using HeroesOfDice.Managers;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +20,6 @@ public class AbilityButton : MonoBehaviour
         model = null;
         button.interactable = false;
         abilityName.text = "";
-
     }
 
     public void SetModel(BDice m)
@@ -34,4 +34,16 @@ public class AbilityButton : MonoBehaviour
         CombatManager.Instance.Attacker = model;
         MenuManager.Instance.CallHightlightSelection();
     }
+
+    public void OnDisable()
+    {
+        TurnManager.Instance.TurnEnding -= Flush;
+    }
+
+    public void OnEnable()
+    {
+        TurnManager.Instance.TurnEnding += Flush;
+    }
+
+
 }
