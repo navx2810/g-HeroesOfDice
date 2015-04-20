@@ -22,13 +22,18 @@ public class EmulateScenarioManager : MonoBehaviour {
         {
             party[x].DiceObject = CombatManager.Instance.PartyDiceObjects[x];
             party[x].DiceObject.diceModel = party[x];
+            party[x].OnDead += party[x].DiceObject.OnDeath;
             enemy[x].DiceObject = CombatManager.Instance.EnemyDiceObjects[x];
             enemy[x].DiceObject.diceModel = enemy[x];
+            enemy[x].OnDead += enemy[x].DiceObject.OnDeath;
         }
 
         CombatManager.Instance.PlayersParty = party;
         CombatManager.Instance.EnemyParty = enemy;
 
         MenuManager.Instance.CurrentState = MenuManager.Instance.States[0];
+
+        TurnManager.Instance.AI = MenuManager.Instance.gameObject.AddComponent<EasyAI>();
+
     }
 }
