@@ -18,12 +18,16 @@ namespace HeroesOfDice.GameObjects
         private Vector3 startingPosition;
         public Transform floor;
 
+        public bool isDead;
+
         // Use this for initialization
         public void Start()
         {
             sides = GetComponentsInChildren<DiceSide>();
             for (int x = 0; x < sides.Length; x++)
                 sides[x].Index = x;
+
+            isDead = false;
 
             startingPosition = transform.position;
             collisionCheck = GetComponent<CheckForNonCollision>();
@@ -79,8 +83,11 @@ namespace HeroesOfDice.GameObjects
         //				}
         //		}
 
-        void Roll()
+        public void Roll()
         {
+            if (isDead)
+                return;
+
             transform.position = startingPosition;
             touchingSide = null;
             upSide = null;
@@ -98,6 +105,16 @@ namespace HeroesOfDice.GameObjects
             touchingSide = null;
             upSide = null;
             collisionCheck.enabled = true;
+        }
+
+        public void OnDisable()
+        {
+            diceModel.OnDead -= OnDeath;
+        }
+
+        public void OnDeath(BDice dice)
+        {
+            isDead = true;
         }
 
     }
