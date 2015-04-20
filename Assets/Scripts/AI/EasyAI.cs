@@ -20,12 +20,27 @@ public class EasyAI : BAi
         StartCoroutine(DoActions());
     }
 
+    public override void PopulateSheets()
+    {
+        var players = CombatManager.Instance.PlayersParty;
+        var enemies = CombatManager.Instance.EnemyParty;
+        HelpSheet.Clear();
+        ThreatSheet.Clear();
+
+        foreach(var dice in players)
+            if( !dice.IsDead )
+                ThreatSheet.Add(dice);
+        foreach(var dice in enemies)
+            if( !dice.IsDead )
+                HelpSheet.Add(dice);
+    }
+
     IEnumerator DoActions()
     {
         for (var x = 0; x < 3; x++)
         {
             BDice dice = CombatManager.Instance.EnemyAbilities.Keys.First();
-
+            PopulateSheets();
             CombatManager.Instance.Attacker = dice;
 
             if (dice.TargetType == ETargetType.Enemy)
@@ -47,13 +62,13 @@ public class EasyAI : BAi
 
     private BDice GetFriendly()
     {
-        int count = Random.Range(0, 729) % 3;
+        int count = Random.Range(0, 729) % ThreatSheet.Count;
         return HelpSheet[count];
     }
 
     private BDice GetOpponent()
     {
-        int count = Random.Range(0, 729) % 3;
+        int count = Random.Range(0, 729) % ThreatSheet.Count;
         return ThreatSheet[count];
     }
 }
