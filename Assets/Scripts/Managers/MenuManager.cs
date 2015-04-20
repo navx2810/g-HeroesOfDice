@@ -36,6 +36,8 @@ namespace HeroesOfDice.Managers
         public BMenuState CurrentState { get; set; }
         public BDice SelectedModel { get; set; }
 
+        [SerializeField] private TextAlert _textAlert;
+
         [SerializeField]
         private BMenuState[] _states;
         public BMenuState[] States
@@ -107,6 +109,16 @@ namespace HeroesOfDice.Managers
 
             CombatManager.Instance.Defender = model;
             CombatManager.Instance.Attacker.UseAbility();
+        }
+
+        public void DisplayMessage(string message, float duration)
+        {
+            _textAlert.SetText(message);
+        }
+
+        public void DisplayMessage(string message)
+        {
+            DisplayMessage(message, 1f);
         }
     }
 }
