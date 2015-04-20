@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using System.Linq;
 using HeroesOfDice;
 using HeroesOfDice.Managers;
 using JetBrains.Annotations;
+using Random = UnityEngine.Random;
 
 public class EasyAI : BAi
 {
@@ -37,9 +39,13 @@ public class EasyAI : BAi
 
     IEnumerator DoActions()
     {
+        yield return new WaitForSeconds(1f);
         for (var x = 0; x < 3; x++)
         {
+            if (CombatManager.Instance.EnemyAbilities.Count == 0)
+                break;
             BDice dice = CombatManager.Instance.EnemyAbilities.Keys.First();
+            CombatManager.Instance.EnemyAbilities.Remove(dice);
             PopulateSheets();
             CombatManager.Instance.Attacker = dice;
 
@@ -48,9 +54,10 @@ public class EasyAI : BAi
             else if (dice.TargetType == ETargetType.Ally)
                 CombatManager.Instance.Defender = GetFriendly();
 
+            MenuManager.Instance.DisplayMessage(String.Format("{0} uses {1} against {2}", dice.Name, dice.UpSide.Ability.Name, CombatManager.Instance.Defender.Name), 1.5f);
             CombatManager.Instance.Attacker.UseAbility();
 
-            yield return new WaitForSeconds(1f + Random.Range(0f, 1f));
+            yield return new WaitForSeconds(2f + Random.Range(0f, 1f));
 
             if (CombatManager.Instance.EnemyAbilities.Count == 0)
                 break;
