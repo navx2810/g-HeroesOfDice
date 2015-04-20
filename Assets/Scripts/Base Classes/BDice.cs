@@ -15,6 +15,7 @@ namespace HeroesOfDice
         public BSide[] Abilities { get; set; }
         public ETargetType TargetType { get; set; }
         public int Priority { get; set; }
+        public bool IsDead { get; set; }
 
         public Dice DiceObject { get; set; }
 
@@ -26,6 +27,7 @@ namespace HeroesOfDice
             TargetType = targetType;
             Abilities = new BSide[6];
             CurrentHealth = maxHealth;
+            IsDead = false;
         }
 
         public void UseAbility() { UpSide.OnUse(); CombatManager.Instance.UnregisterAbility(this); }
@@ -34,19 +36,19 @@ namespace HeroesOfDice
         {
             CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0, MaxHealth);
             if (OnHealthChange != null) OnHealthChange(this);
-            IsDead();
+            CheckDead();
         }
 
         public delegate void NotifyChange(BDice dice);
         public event NotifyChange OnHealthChange;
         public event NotifyChange OnDead;
 
-        public bool IsDead()
+        private void CheckDead()
         {
             if (CurrentHealth > 0)
-                return false;
+                return;
+            IsDead = true;
             if (OnDead != null) OnDead(this);
-            return true;
         }
     }
 }
