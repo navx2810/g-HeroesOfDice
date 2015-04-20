@@ -35,6 +35,7 @@ namespace HeroesOfDice.Managers
 
             PlayerAbilities = new Dictionary<BDice, BAbility>(3);
             EnemyAbilities = new Dictionary<BDice, BAbility>(3);
+
         }
 
         public BDice Attacker { get; set; }
@@ -80,15 +81,20 @@ namespace HeroesOfDice.Managers
             if (OnAbilityRegister != null) OnAbilityRegister(dice);
 
             // TODO: add check to see if all abilities do not have the target type of None, otherwise the turn would end
-            if (PlayerAbilities.Count == PlayersParty.Length)
+            if (TurnManager.Instance.IsPlayersTurn)
             {
-                bool allNone = true;
-                foreach (var d in PlayerAbilities)
-                    if (d.Key.TargetType == ETargetType.Ally)
-                        if (d.Value.TargetType != ETargetType.None)
-                            allNone = false;
-                if (allNone)
-                    Debug.Log("No usable abilities, ending turn");
+                bool isAllEmpty = true;
+                bool isMissingAny = false;
+
+                foreach (var d in PlayersParty)
+                    if (!isAllEmpty || isMissingAny)
+                        break;
+                    else if (d.UpSide != null && d.UpSide.Ability.TargetType != ETargetType.None)
+                        isAllEmpty = false;
+                    else if (d.UpSide == null)
+                        isMissingAny = true;
+
+                if(isAllEmpty & !isMissingAny) TurnManager.Instance.EndTurn();
             }
         }
 
