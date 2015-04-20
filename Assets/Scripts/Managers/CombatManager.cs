@@ -111,5 +111,10 @@ namespace HeroesOfDice.Managers
         
         public event NotifyChange OnAbilityRegister;
         public event NotifyChange OnAbilityUnregister;
+
+        public void HandleDeath(BDice dice)
+        {
+            UnregisterAbility(dice);
+        }
     }
 }
