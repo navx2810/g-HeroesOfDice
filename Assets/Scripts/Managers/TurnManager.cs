@@ -45,12 +45,14 @@ namespace HeroesOfDice.Managers
                 Debug.Log("Enemies Turn over, Rerolling");
                 Roll();
                 if (TurnEnding != null) TurnEnding();
+                MenuManager.Instance.DisplayMessage("Enemies turn ending", 2f);
                 CombatManager.Instance.PlayerAbilities.Clear();
                 CombatManager.Instance.EnemyAbilities.Clear();
                 IsPlayersTurn = true;
             }
             else
             {
+                MenuManager.Instance.DisplayMessage("Player's turn ending", 2f);
                 IsPlayersTurn = false;
                 AI.DoAction();
             }
