@@ -19,7 +19,7 @@ public class HighlightSelection : BMenuState
         ETargetType abiltiesTargetType = CombatManager.Instance.Attacker.UpSide.Ability.TargetType;
 
         foreach (var panel in panels)
-            if (panel.model.TargetType == abiltiesTargetType)
+            if (panel.model.TargetType == abiltiesTargetType && !panel.model.IsDead)
             {
                 panel.button.onClick.RemoveAllListeners();
                 var panel1 = panel;
