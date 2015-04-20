@@ -35,6 +35,9 @@ public class EasyAI : BAi
         foreach(var dice in enemies)
             if( !dice.IsDead )
                 HelpSheet.Add(dice);
+
+        ThreatSheet.Sort(new CompareDiceThreat());
+        HelpSheet.Sort(new CompareDiceHelp());
     }
 
     IEnumerator DoActions()
