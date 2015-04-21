@@ -17,7 +17,7 @@ public class DicePanel : MonoBehaviour
     public void Start()
     {
         BDice[] party;
-        party = isPlayer ? CombatManager.Instance.PlayersParty : CombatManager.Instance.EnemyParty;
+        party = isPlayer ? CombatManager.Instance.PlayersModels : CombatManager.Instance.EnemysModels;
         for (int x = 0; x < party.Length; x++)
         {
             entityPanel[x].model = party[x];

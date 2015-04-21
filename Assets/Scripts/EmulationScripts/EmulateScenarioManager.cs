@@ -28,8 +28,8 @@ public class EmulateScenarioManager : MonoBehaviour {
             enemy[x].OnDead += enemy[x].DiceObject.OnDeath;
         }
 
-        CombatManager.Instance.PlayersParty = party;
-        CombatManager.Instance.EnemyParty = enemy;
+        CombatManager.Instance.PlayersModels = party;
+        CombatManager.Instance.EnemysModels = enemy;
 
         MenuManager.Instance.CurrentState = MenuManager.Instance.States[0];
 

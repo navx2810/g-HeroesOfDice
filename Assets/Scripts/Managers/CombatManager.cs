@@ -40,8 +40,8 @@ namespace HeroesOfDice.Managers
 
         public BDice Attacker { get; set; }
         public BDice Defender { get; set; }
-        public BDice[] PlayersParty { get; set; }
-        public BDice[] EnemyParty { get; set; }
+        public BDice[] PlayersModels { get; set; }
+        public BDice[] EnemysModels { get; set; }
 
         [SerializeField]
         private Dice[] _partyDice;
@@ -86,7 +86,7 @@ namespace HeroesOfDice.Managers
                 bool isAllEmpty = true;
                 bool isMissingAny = false;
 
-                foreach (var d in PlayersParty)
+                foreach (var d in PlayersModels)
                     if (!isAllEmpty || isMissingAny)
                         break;
                     else if (d.UpSide != null && d.UpSide.Ability.TargetType != ETargetType.None)

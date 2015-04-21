@@ -24,8 +24,8 @@ public class EasyAI : BAi
 
     public override void PopulateSheets()
     {
-        var players = CombatManager.Instance.PlayersParty;
-        var enemies = CombatManager.Instance.EnemyParty;
+        var players = CombatManager.Instance.PlayersModels;
+        var enemies = CombatManager.Instance.EnemysModels;
         HelpSheet.Clear();
         ThreatSheet.Clear();
 
