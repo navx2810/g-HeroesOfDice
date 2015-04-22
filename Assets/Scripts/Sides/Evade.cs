@@ -1,4 +1,6 @@
-using UnityEngine;
+using System;
+using HeroesOfDice.Managers;
+using Random = UnityEngine.Random;
 
 namespace HeroesOfDice.Sides
 {
@@ -15,6 +17,8 @@ namespace HeroesOfDice.Sides
         {
             if (Random.Range(0f, 1f) > EvadeChance)
                 base.OnHit(amount);
+            else
+                MenuManager.Instance.DisplayMessage(String.Format("{0} evaded the attack!", CombatManager.Instance.Defender.Name));
 
         }
     }

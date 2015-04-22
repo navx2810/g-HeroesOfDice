@@ -1,3 +1,6 @@
+using System;
+using HeroesOfDice.Managers;
+
 namespace HeroesOfDice.Sides
 {
    public class Armored : BSide
@@ -12,7 +15,10 @@ namespace HeroesOfDice.Sides
        public override void OnHit(int amount)
        {
            if (ArmorCount > 0)
+           {
                ArmorCount--;
+               MenuManager.Instance.DisplayMessage(String.Format("{0}'s armor blocked the attack", CombatManager.Instance.Defender.Name));
+           }
            else
                base.OnHit(amount);
        }
