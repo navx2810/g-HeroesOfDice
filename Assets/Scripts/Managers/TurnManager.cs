@@ -40,6 +40,8 @@ namespace HeroesOfDice.Managers
 
         public void EndTurn()
         {
+            if (CombatManager.Instance.IsGameOver)
+                return;
             if (!IsPlayersTurn)
             {
                 Debug.Log("Enemies Turn over, Rerolling");

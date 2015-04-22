@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace HeroesOfDice.Managers
@@ -122,6 +123,11 @@ namespace HeroesOfDice.Managers
         public void DisplayMessage(string message)
         {
             DisplayMessage(message, 1f);
+        }
+
+        public void DisplayEndGameMessage(string message)
+        {
+           _textAlert.ShowEndMessage(message); 
         }
     }
 }
