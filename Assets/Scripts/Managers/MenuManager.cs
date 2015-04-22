@@ -105,7 +105,10 @@ namespace HeroesOfDice.Managers
             CallGameScreen();
 
             if (model.UpSide == null)
+            {
+                Instance.DisplayMessage("Dice is not touching! Try again!");
                 return;
+            }
 
             CombatManager.Instance.Defender = model;
             CombatManager.Instance.Attacker.UseAbility();

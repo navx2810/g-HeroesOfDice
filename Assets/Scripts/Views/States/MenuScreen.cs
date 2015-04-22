@@ -11,6 +11,11 @@ public class MenuScreen : BMenuState
         Application.Quit();
     }
 
+    public void Reset()
+    {
+        Application.LoadLevel(Application.loadedLevel);
+    }
+
     public override void OnEnter()
     {
         catcher.SetActive(true);
