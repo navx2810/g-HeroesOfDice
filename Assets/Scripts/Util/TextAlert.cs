@@ -1,6 +1,9 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class TextAlert : MonoBehaviour
 {
@@ -8,16 +11,18 @@ public class TextAlert : MonoBehaviour
     private Text a, b;
 
     private bool isShowing = false;
+    private List<String> _messageQueue; 
 
     public void Awake()
     {
-        SetText("");
+        _messageQueue = new List<string>();
     }
 
     public void SetText(string message, float duration)
     {
-        if (!isShowing) StartCoroutine(ShowText(message, duration));
-        StartCoroutine(ShowText(message, duration));
+        _messageQueue.Add(message);
+
+        if (!isShowing) StartCoroutine(ShowText(1f));
     }
 
     public void SetText(string message)
@@ -25,16 +30,39 @@ public class TextAlert : MonoBehaviour
         SetText(message, 2f);
     }
 
-    IEnumerator ShowText(string message, float duration)
+    public void ShowEndMessage(string message)
     {
-        a.text = message;
-        b.text = message;
+        StopAllCoroutines();
+        StartCoroutine(ShowEnd(message));
+    }
 
-        yield return new WaitForSeconds(duration);
+    IEnumerator ShowText(float duration)
+    {
+        while (_messageQueue.Count != 0)
+        {
+            a.text = _messageQueue.First();
+            b.text = _messageQueue.First();
+
+            _messageQueue.Remove(_messageQueue.First());
+
+            yield return new WaitForSeconds(duration);
+        }
 
         a.text = "";
         b.text = "";
 
-        isShowing = false;
+        isShowing = false; 
+
+    }
+
+    IEnumerator ShowEnd(string m)
+    {
+        a.text = m;
+        b.text = m;
+
+        yield return new WaitForSeconds(2f);
+
+        Application.Quit();
+        Application.LoadLevel(Application.loadedLevel);
     }
 }
