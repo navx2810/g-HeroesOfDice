@@ -24,8 +24,8 @@ public class EasyAI : BAi
 
     public override void PopulateSheets()
     {
-        var players = CombatManager.Instance.PlayersModels;
-        var enemies = CombatManager.Instance.EnemysModels;
+        var players = CombatManager.Instance.ActivePlayerModels;
+        var enemies = CombatManager.Instance.ActiveEnemyModels;
         HelpSheet.Clear();
         ThreatSheet.Clear();
 
@@ -45,16 +45,20 @@ public class EasyAI : BAi
         yield return new WaitForSeconds(1f);
         for (var x = 0; x < 3; x++)
         {
-            if (CombatManager.Instance.EnemyAbilities.Count == 0)
-                break;
+            //if (CombatManager.Instance.EnemyAbilities.Count == 0)
+            //    break;
             BDice dice = CombatManager.Instance.EnemyAbilities.Keys.First();
+
+            if (dice.UpSide.Ability.TargetType == ETargetType.None)
+                break;
+
             CombatManager.Instance.EnemyAbilities.Remove(dice);
             PopulateSheets();
             CombatManager.Instance.Attacker = dice;
 
-            if (dice.TargetType == ETargetType.Enemy)
+            if (dice.UpSide.Ability.TargetType == ETargetType.Enemy)
                 CombatManager.Instance.Defender = GetOpponent();
-            else if (dice.TargetType == ETargetType.Ally)
+            else if (dice.UpSide.Ability.TargetType == ETargetType.Ally)
                 CombatManager.Instance.Defender = GetFriendly();
 
             MenuManager.Instance.DisplayMessage(String.Format("{0} uses {1} against {2}", dice.Name, dice.UpSide.Ability.Name, CombatManager.Instance.Defender.Name), 1.5f);
@@ -72,7 +76,7 @@ public class EasyAI : BAi
 
     private BDice GetFriendly()
     {
-        int count = Random.Range(0, 729) % ThreatSheet.Count;
+        int count = Random.Range(0, 729) % HelpSheet.Count;
         return HelpSheet[count];
     }
 
