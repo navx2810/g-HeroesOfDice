@@ -1,27 +1,29 @@
-﻿using UnityEngine;
-using System.Collections;
+using HeroesOfDice;
+using HeroesOfDice.Managers;
+using UnityEngine;
 
 public class DicePanel : MonoBehaviour
 {
 
-		public EntityPanel[] entityPanel;
+    public EntityPanel[] entityPanel;
+    public bool isPlayer;
 
-		// Use this for initialization
-		void Start ()
-		{
-		
-		}
-	
-		// Update is called once per frame
-		void Update ()
-		{
-	
-		}
+    // Use this for initialization
+    public void Awake()
+    {
+        entityPanel = GetComponentsInChildren<EntityPanel>();
+    }
 
-		public void Init (DiceModel[] diceModel)
-		{
-				for (int x = 0; x < diceModel.Length; x++)
-						entityPanel [x].Init (diceModel [x].name);
-				// This makes the assumption there's always an equal amount of panels to models
-		}
+    public void Start()
+    {
+        BDice[] party;
+        party = isPlayer ? CombatManager.Instance.PlayersModels : CombatManager.Instance.EnemysModels;
+        for (int x = 0; x < party.Length; x++)
+        {
+            entityPanel[x].model = party[x];
+            entityPanel[x].Init();
+            party[x].OnHealthChange += entityPanel[x].OnHealthChange;
+        }
+    }
+
 }

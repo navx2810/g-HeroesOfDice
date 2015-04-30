@@ -1,33 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
+using UnityEngine;
 
-public class DiceSide : MonoBehaviour
+namespace HeroesOfDice.GameObjects
 {
-		[SerializeField]
-		private string
-				sideName;
-
-		// Use this for initialization
-		void Start ()
-		{
-		}
-	
-		// Update is called once per frame
-		void Update ()
-		{
-	
-		}
-
-//		void OnTriggerEnter (Collider collider)
-//		{
-//				if (!(collider is DiceSide))
-//				if (collider.CompareTag ("Floor"))
-//						parentDice.touchingSide = this;
-//		}
-//
-//		void OnCollisionExit ()
-//		{
-//				parentDice.touchingSide = null;
-//		}
-
+    public class DiceSide : MonoBehaviour
+    {
+        public int Index { get; set; }
+    }
 }

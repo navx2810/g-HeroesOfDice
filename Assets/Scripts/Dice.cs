@@ -1,97 +1,121 @@
-﻿using UnityEngine;
-using System.Collections;
+using HeroesOfDice.Util;
+using UnityEngine;
 
-public class Dice : MonoBehaviour
+namespace HeroesOfDice.GameObjects
 {
+    public class Dice : MonoBehaviour
+    {
 
-		public DiceModel diceModel;
-		[SerializeField]
-		public DiceSide[]
-				sides;
-		[SerializeField]
-		public DiceSide
-				touchingSide, upSide;
-		private CheckForNonCollision collisionCheck;
+        public BDice diceModel;
+        [SerializeField]
+        public DiceSide[]
+            sides;
+        [SerializeField]
+        public DiceSide
+            touchingSide, upSide;
+        private CheckForNonCollision collisionCheck;
 
-		private Vector3 startingPosition;
-		public Transform floor; 
-	
-		// Use this for initialization
-		void Start ()
-		{
-				sides = GetComponentsInChildren<DiceSide> ();
-				startingPosition = transform.position;
-				collisionCheck = GetComponent<CheckForNonCollision> ();
-				upSide = null;
-				touchingSide = null;
-				Roll ();
-		
-		}
-	
-		// Update is called once per frame
-		void Update ()
-		{
-				if (Input.GetKeyUp (KeyCode.A)) {
-						Roll ();
-				} else if (Input.GetKeyUp (KeyCode.Space))
-						ShootUp ();
-						
-		}
+        private Vector3 startingPosition;
+        public Transform floor;
 
-//		IEnumerator CheckSidesForCollision (float seconds)
-//		{
-//				yield return new WaitForSeconds (seconds);
-//				Debug.Log ("Checking for dice sides");
-//				if (rigidbody.velocity.magnitude == 0) {
-//						if (touchingSide == null) {
-//								StopAllCoroutines ();
-//								StartCoroutine (CheckSidesForCollision (7f));
-//						}
-//				} else {
-//						StopAllCoroutines ();
-//						StartCoroutine (CheckSidesForCollision (5f));
-//				}	
-//		}
+        public bool isDead;
 
-//		IEnumerator CheckSidesForCollision (float seconds)
-//		{
-//				yield return new WaitForSeconds (seconds);
-//				if (rigidbody.velocity.magnitude == 0) {
-//						if (touchingSide != null && Vector3.Dot (touchingSide.transform.forward, floor.up) <= -.99f)
-//								foreach (DiceSide side in sides) {
-//										if (Vector3.Dot (side.transform.forward, floor.up) >= .99f)
-//												upSide = side;
-//								}
-//						else {
-//								//Debug.Log (Vector3.Dot (touchingSide.transform.forward, floor.transform.up));
-//								ShootUp ();
-//								touchingSide = null;
-//								StopCoroutine (CheckSidesForCollision (7f));
-//								StartCoroutine (CheckSidesForCollision (7f));
-//						}
-//				}
-//		}
+        // Use this for initialization
+        public void Start()
+        {
+            sides = GetComponentsInChildren<DiceSide>();
+            for (int x = 0; x < sides.Length; x++)
+                sides[x].Index = x;
 
-		void Roll ()
-		{
-				transform.position = startingPosition;
-				touchingSide = null;
-				upSide = null;
-				collisionCheck.enabled = true;
-//				touchingSide = null;
-//				upSide = null;
-//				StopCoroutine (CheckSidesForCollision (7f));
-//				StartCoroutine (CheckSidesForCollision (7f));
-		}
+            isDead = false;
 
-		public void ShootUp ()
-		{
-				rigidbody.AddForce (Vector3.up * 500f);
-				rigidbody.AddTorque (Vector3.right * 200f);
-				touchingSide = null;
-				upSide = null;
-				collisionCheck.enabled = true;
-		}
+            startingPosition = transform.position;
+            collisionCheck = GetComponent<CheckForNonCollision>();
+            upSide = null;
+            touchingSide = null;
+            Roll();
 
+        }
 
+        // Update is called once per frame
+        public void Update()
+        {
+            if (Input.GetKeyUp(KeyCode.A))
+            {
+                Roll();
+            }
+            else if (Input.GetKeyUp(KeyCode.Space))
+                ShootUp();
+
+        }
+
+        //		IEnumerator CheckSidesForCollision (float seconds)
+        //		{
+        //				yield return new WaitForSeconds (seconds);
+        //				Debug.Log ("Checking for dice sides");
+        //				if (rigidbody.velocity.magnitude == 0) {
+        //						if (touchingSide == null) {
+        //								StopAllCoroutines ();
+        //								StartCoroutine (CheckSidesForCollision (7f));
+        //						}
+        //				} else {
+        //						StopAllCoroutines ();
+        //						StartCoroutine (CheckSidesForCollision (5f));
+        //				}	
+        //		}
+
+        //		IEnumerator CheckSidesForCollision (float seconds)
+        //		{
+        //				yield return new WaitForSeconds (seconds);
+        //				if (rigidbody.velocity.magnitude == 0) {
+        //						if (touchingSide != null && Vector3.Dot (touchingSide.transform.forward, floor.up) <= -.99f)
+        //								foreach (DiceSide side in sides) {
+        //										if (Vector3.Dot (side.transform.forward, floor.up) >= .99f)
+        //												upSide = side;
+        //								}
+        //						else {
+        //								//Debug.Log (Vector3.Dot (touchingSide.transform.forward, floor.transform.up));
+        //								ShootUp ();
+        //								touchingSide = null;
+        //								StopCoroutine (CheckSidesForCollision (7f));
+        //								StartCoroutine (CheckSidesForCollision (7f));
+        //						}
+        //				}
+        //		}
+
+        public void Roll()
+        {
+            if (isDead)
+                return;
+
+            transform.position = startingPosition;
+            touchingSide = null;
+            upSide = null;
+            collisionCheck.enabled = true;
+            //				touchingSide = null;
+            //				upSide = null;
+            //				StopCoroutine (CheckSidesForCollision (7f));
+            //				StartCoroutine (CheckSidesForCollision (7f));
+        }
+
+        public void ShootUp()
+        {
+            GetComponent<Rigidbody>().AddForce(Vector3.up * 500f);
+            GetComponent<Rigidbody>().AddTorque(Vector3.right * 200f);
+            touchingSide = null;
+            upSide = null;
+            collisionCheck.enabled = true;
+        }
+
+        public void OnDisable()
+        {
+            diceModel.OnDead -= OnDeath;
+        }
+
+        public void OnDeath(BDice dice)
+        {
+            isDead = true;
+        }
+
+    }
 }

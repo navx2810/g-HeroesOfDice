@@ -1,0 +1,46 @@
+using HeroesOfDice.GameObjects;
+using HeroesOfDice.Managers;
+using UnityEngine;
+
+namespace HeroesOfDice.Util
+{
+    [RequireComponent(typeof(Rigidbody))]
+   public class CheckForNonCollision : MonoBehaviour
+    {
+        public Rigidbody _rigidbody;
+        public Dice dice;
+
+        public void Awake()
+        {
+            _rigidbody = GetComponent<Rigidbody>();
+            dice = GetComponent<Dice>();
+        }
+
+        public void Update()
+        {
+            if (_rigidbody.velocity.magnitude <= 0)
+            {
+                CheckSides();
+                //enabled = false;
+            }
+        }
+
+        void CheckSides()
+        {
+            foreach (DiceSide side in dice.sides)
+                if (Vector3.Dot(side.transform.forward, dice.floor.up) <= -.99f)
+                    dice.touchingSide = side;
+                else if (Vector3.Dot(side.transform.forward, dice.floor.up) >= .99f)
+                    dice.upSide = side;
+
+            if (dice.upSide == null)
+                dice.ShootUp();
+            else
+            {
+                dice.diceModel.UpSide = dice.diceModel.Abilities[dice.upSide.Index];
+                CombatManager.Instance.RegisterAbility(dice.diceModel);
+                enabled = false;
+            }
+        }
+    }
+}

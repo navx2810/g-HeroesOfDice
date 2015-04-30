@@ -1,26 +1,39 @@
-﻿using UnityEngine;
+using HeroesOfDice;
+using HeroesOfDice.Managers;
+using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class EntityPanel : MonoBehaviour
 {
-		public Text heroName;
-		public Slider heroHealth;
+    public BDice model;
+    public Text nameLabel;
+    public Slider healthBar;
+    public Button button;
 
-		// Use this for initialization
-		void Start ()
-		{
-	
-		}
-	
-		// Update is called once per frame
-		void Update ()
-		{
-	
-		}
-		
-		public void Init (string heroName)
-		{
-				this.heroName.text = heroName;
-		}
+    // todo: Removed the reference to BDice in this method
+    public void OnHealthChange(BDice m)
+    {
+        healthBar.value = model.CurrentHealth;
+    }
+
+    public void Init()
+    {
+        button.onClick.AddListener(Click);
+        nameLabel.text = model.Name;
+        healthBar.maxValue = model.MaxHealth;
+        healthBar.minValue = 0;
+        healthBar.value = model.CurrentHealth;
+    }
+
+    public void Click()
+    {
+        MenuManager.Instance.SelectedModel = model;
+        MenuManager.Instance.CallDiceViewOpen();
+    }
+
+
+    
+
+
+
 }

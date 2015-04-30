@@ -1,20 +1,54 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
+using HeroesOfDice;
+using HeroesOfDice.Managers;
+using UnityEngine;
 
 public class AbilityPanel : MonoBehaviour
 {
 
-		public Button[] abilityButtons;
+    public AbilityButton[] buttons;
+    public ETargetType panelType;
 
-		// Use this for initialization
-		void Start ()
-		{
-				abilityButtons = GetComponentInChildren<RectTransform> ().GetComponentsInChildren<Button> ();
-		}
-	
-		public void hitAbility (Button button)
-		{
 
-		}
+    // Use this for initialization
+    public void Start()
+    {
+        //abilityButtons = GetComponentInChildren<RectTransform> ().GetComponentsInChildren<Button> ();
+        buttons = GetComponentInChildren<RectTransform>().GetComponentsInChildren<AbilityButton>();
+    }
+
+    public void OnEnable()
+    {
+        CombatManager.Instance.OnAbilityRegister += AddToView;
+        CombatManager.Instance.OnAbilityUnregister += RemoveFromView;
+    }
+
+    public void OnDisable()
+    {
+        CombatManager.Instance.OnAbilityRegister -= AddToView;
+        CombatManager.Instance.OnAbilityUnregister -= RemoveFromView;
+    }
+
+    public void AddToView(BDice dice)
+    {
+        if (dice.TargetType == panelType)
+            for (int x = 0; x < buttons.Length; x++)
+                if (buttons[x].model == null || buttons[x].model == dice)
+                {
+                    buttons[x].SetModel(dice);
+
+                    break;
+                }
+    }
+
+    public void RemoveFromView(BDice dice)
+    {
+        for (int x = 0; x < buttons.Length; x++)
+            if (buttons[x].model == dice)
+            {
+                buttons[x].Flush();
+                break;
+            }
+    }
+
+
 }
