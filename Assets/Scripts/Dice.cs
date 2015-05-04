@@ -92,6 +92,7 @@ namespace HeroesOfDice.GameObjects
             touchingSide = null;
             upSide = null;
             collisionCheck.enabled = true;
+            GetComponent<RandomRotation>().enabled = true;
             //				touchingSide = null;
             //				upSide = null;
             //				StopCoroutine (CheckSidesForCollision (7f));
