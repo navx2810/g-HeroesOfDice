@@ -5,33 +5,43 @@ using UnityEngine;
 namespace HeroesOfDice.Util
 {
     [RequireComponent(typeof(Rigidbody))]
-   public class CheckForNonCollision : MonoBehaviour
+    public class CheckForNonCollision : MonoBehaviour
     {
-        public Rigidbody _rigidbody;
+        public Transform _tf;
+        public Vector3 oldPosition, newPosition, oldRotation, newRotation;
         public Dice dice;
 
         public void Awake()
         {
-            _rigidbody = GetComponent<Rigidbody>();
             dice = GetComponent<Dice>();
+            _tf = transform;
         }
+
+        public void FixedUpdate()
+        {
+            oldPosition = _tf.position;
+            oldRotation = _tf.rotation.eulerAngles;
+        }
+
+
 
         public void Update()
         {
-            if (_rigidbody.velocity.magnitude <= 0)
-            {
+            newPosition = _tf.position;
+            newRotation = _tf.rotation.eulerAngles;
+
+            if (oldPosition.Equals(newPosition) && oldRotation.Equals(newRotation))
                 CheckSides();
-                //enabled = false;
-            }
         }
 
         void CheckSides()
         {
             foreach (DiceSide side in dice.sides)
-                if (Vector3.Dot(side.transform.forward, dice.floor.up) <= -.99f)
-                    dice.touchingSide = side;
-                else if (Vector3.Dot(side.transform.forward, dice.floor.up) >= .99f)
+                if (Vector3.Dot(side.transform.forward, dice.floor.up) > .9f)
+                {
                     dice.upSide = side;
+                    break;
+                }
 
             if (dice.upSide == null)
                 dice.ShootUp();
