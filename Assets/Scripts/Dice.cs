@@ -1,3 +1,5 @@
+using DG.Tweening;
+using HeroesOfDice.Managers;
 using HeroesOfDice.Util;
 using UnityEngine;
 
@@ -88,6 +90,8 @@ namespace HeroesOfDice.GameObjects
             if (isDead)
                 return;
 
+            DOTween.CompleteAll();
+
             transform.position = startingPosition;
             touchingSide = null;
             upSide = null;
@@ -101,6 +105,7 @@ namespace HeroesOfDice.GameObjects
 
         public void ShootUp()
         {
+            CombatManager.Instance.UnregisterAbility(diceModel);
             GetComponent<Rigidbody>().AddForce(Vector3.up * 500f);
             GetComponent<Rigidbody>().AddTorque(Vector3.right * 200f);
             touchingSide = null;
