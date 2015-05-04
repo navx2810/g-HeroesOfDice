@@ -4,13 +4,11 @@ namespace HeroesOfDice.Util
 {
     public class RandomRotation : MonoBehaviour
     {
-        public void Start()
+        public void OnEnable()
         {
-            float x = Random.Range(0, 360f);
-            float y = Random.Range(0, 360f);
-            float z = Random.Range(0, 360f);
-
-            transform.rotation = new Quaternion(x, y, z, 1f);
+            transform.rotation = Quaternion.Euler(Random.Range(0, 360f), Random.Range(0, 360f), Random.Range(0, 360f));
+            GetComponent<Rigidbody>().AddTorque(new Vector3(Random.Range(0, 360f), Random.Range(0, 360f), Random.Range(0, 360f)) * 200f);
+            enabled = false;
         }
     }
 }
