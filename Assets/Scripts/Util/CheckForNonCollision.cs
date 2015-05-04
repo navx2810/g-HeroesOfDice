@@ -37,7 +37,7 @@ namespace HeroesOfDice.Util
         void CheckSides()
         {
             foreach (DiceSide side in dice.sides)
-                if (Vector3.Dot(side.transform.forward, dice.floor.up) > .9f)
+                if (Vector3.Dot(side.transform.forward, dice.floor.up) > .95f)
                 {
                     dice.upSide = side;
                     break;
