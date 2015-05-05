@@ -114,9 +114,9 @@ namespace HeroesOfDice.Managers
 
             CombatManager.Instance.Defender = model;
             //CombatManager.Instance.Attacker.UseAbility();
-            if (CombatManager.Instance.Attacker.UpSide.Ability.TargetType == ETargetType.Ally)
-                CombatManager.Instance.Attacker.UseAbility();
-            else
+            //if (CombatManager.Instance.Attacker.UpSide.Ability.TargetType == ETargetType.Ally)
+            //    CombatManager.Instance.Attacker.UseAbility();
+            //else
                 MoveToState(_states[4]);
         }
 
