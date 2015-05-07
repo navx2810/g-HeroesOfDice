@@ -36,6 +36,7 @@ namespace HeroesOfDice.Managers
 
         public BMenuState CurrentState { get; set; }
         public BDice SelectedModel { get; set; }
+        public bool IsTweening = false;
 
         [SerializeField]
         private TextAlert _textAlert;
@@ -123,6 +124,14 @@ namespace HeroesOfDice.Managers
         public void DisplayMessage(string message, float duration)
         {
             _textAlert.SetText(message);
+        }
+
+        public void HandleEndTween()
+        {
+            CallGameScreen();
+
+            if(!TurnManager.Instance.IsPlayersTurn)
+                TurnManager.Instance.AI.DoAction();
         }
 
         public void DisplayMessage(string message)
