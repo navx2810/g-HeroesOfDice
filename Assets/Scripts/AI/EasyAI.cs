@@ -4,13 +4,16 @@ using System.Collections;
 using System.Linq;
 using HeroesOfDice;
 using HeroesOfDice.Managers;
-using JetBrains.Annotations;
 using Random = UnityEngine.Random;
 
 public class EasyAI : BAi
 {
+    public bool PerformingAction;
+
     public override void DoAction()
     {
+       
+
         //BDice dice = CombatManager.Instance.EnemyAbilities.First().Key;
 
         //CombatManager.Instance.Attacker = dice;
@@ -19,7 +22,7 @@ public class EasyAI : BAi
         //    CombatManager.Instance.Defender = ThreatSheet.Last().Key;
         //else if (dice.TargetType == ETargetType.Ally)
         //    CombatManager.Instance.Defender = HelpSheet.Last().Key;
-        StartCoroutine(DoActions());
+       if(!PerformingAction) StartCoroutine(DoActions());
     }
 
     public override void PopulateSheets()
@@ -42,9 +45,12 @@ public class EasyAI : BAi
 
     IEnumerator DoActions()
     {
+        PerformingAction = true;
         yield return new WaitForSeconds(1f);
-        for (var x = 0; x < 3; x++)
+        while (CombatManager.Instance.EnemyAbilities.Count > 0)
         {
+            while(MenuManager.Instance.IsTweening)
+                yield return new WaitForSeconds(1f);
             //if (CombatManager.Instance.EnemyAbilities.Count == 0)
             //    break;
             BDice dice = CombatManager.Instance.EnemyAbilities.Keys.First();
@@ -62,15 +68,18 @@ public class EasyAI : BAi
                 CombatManager.Instance.Defender = GetFriendly();
 
             MenuManager.Instance.DisplayMessage(String.Format("{0} uses {1} against {2}", dice.Name, dice.UpSide.Ability.Name, CombatManager.Instance.Defender.Name), 1.5f);
-            CombatManager.Instance.Attacker.UseAbility();
+           
+            MenuManager.Instance.MoveToState(4);
+            //CombatManager.Instance.Attacker.UseAbility();
 
             yield return new WaitForSeconds(2f + Random.Range(0f, 1f));
 
-            if (CombatManager.Instance.EnemyAbilities.Count == 0)
-                break;
+            //if (CombatManager.Instance.EnemyAbilities.Count == 0)
+            //    break;
         }
 
         TurnManager.Instance.EndTurn();
+        PerformingAction = false;
 
     }
 
