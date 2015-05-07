@@ -8,8 +8,6 @@ using Random = UnityEngine.Random;
 
 public class EasyAI : BAi
 {
-    public bool PerformingAction;
-
     public override void DoAction()
     {
        
@@ -22,7 +20,8 @@ public class EasyAI : BAi
         //    CombatManager.Instance.Defender = ThreatSheet.Last().Key;
         //else if (dice.TargetType == ETargetType.Ally)
         //    CombatManager.Instance.Defender = HelpSheet.Last().Key;
-       if(!PerformingAction) StartCoroutine(DoActions());
+
+        if (!IsPerforming) StartCoroutine(DoActions());
     }
 
     public override void PopulateSheets()
@@ -43,20 +42,26 @@ public class EasyAI : BAi
         HelpSheet.Sort(new CompareDiceHelp());
     }
 
-    IEnumerator DoActions()
+   public IEnumerator DoActions()
     {
-        PerformingAction = true;
+        IsPerforming = true;
         yield return new WaitForSeconds(1f);
-        while (CombatManager.Instance.EnemyAbilities.Count > 0)
+        //while (CombatManager.Instance.EnemyAbilities.Count > 0)
+        for (var x = 0; x < 3; x++)
         {
             while(MenuManager.Instance.IsTweening)
                 yield return new WaitForSeconds(1f);
-            //if (CombatManager.Instance.EnemyAbilities.Count == 0)
-            //    break;
+
+            if (CombatManager.Instance.EnemyAbilities.Count == 0)
+                break;
+
             BDice dice = CombatManager.Instance.EnemyAbilities.Keys.First();
 
             if (dice.UpSide.Ability.TargetType == ETargetType.None)
+            {
+                CombatManager.Instance.EnemyAbilities.Remove(dice);
                 break;
+            }
 
             CombatManager.Instance.EnemyAbilities.Remove(dice);
             PopulateSheets();
@@ -79,7 +84,7 @@ public class EasyAI : BAi
         }
 
         TurnManager.Instance.EndTurn();
-        PerformingAction = false;
+        IsPerforming = false;
 
     }
 
