@@ -133,10 +133,6 @@ namespace HeroesOfDice.Managers
             PlayerAbilities.Remove(dice);
             if (OnAbilityUnregister != null) OnAbilityUnregister(dice);
 
-            Debug.Log("[--- What is left over ---]");
-            foreach (var key in PlayerAbilities)
-                Debug.Log(String.Format("{0} : {1}", key.Key.Name, key.Value.Name));
-
             if (TurnManager.Instance.IsPlayersTurn)
             {
                 var count = 0;
