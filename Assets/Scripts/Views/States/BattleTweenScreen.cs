@@ -5,6 +5,7 @@ using HeroesOfDice;
 using HeroesOfDice.GameObjects;
 using HeroesOfDice.Managers;
 using HeroesOfDice.Util;
+using UnityEngine.UI;
 
 public class BattleTweenScreen : BMenuState
 {
@@ -13,10 +14,15 @@ public class BattleTweenScreen : BMenuState
     public Rigidbody AttackersRB, DefendersRB;
     public BoxCollider AttackersBC, DefendersBC;
 
+    public EntityShelf HeroShelf, EnemyShelf;
+
     private Vector3 attackerTempPos;
 
     public override void OnEnter()
     {
+        HeroShelf.Hide();
+        EnemyShelf.Hide();
+
         TweenCatcher.SetActive(true);
         Attacker = CombatManager.Instance.Attacker.DiceObject.transform;
         Defender = CombatManager.Instance.Defender.DiceObject.transform;
@@ -105,6 +111,9 @@ public class BattleTweenScreen : BMenuState
         DefendersRB.isKinematic = false;
 
         TweenCatcher.SetActive(false);
+
+        HeroShelf.Show();
+        EnemyShelf.Show();
 
         // TODO: Alert the TurnManager to check for end of turn instead of doing it in the combat manager? That way the tween will work effectively
     }
