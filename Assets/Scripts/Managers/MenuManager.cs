@@ -37,7 +37,8 @@ namespace HeroesOfDice.Managers
         public BMenuState CurrentState { get; set; }
         public BDice SelectedModel { get; set; }
 
-        [SerializeField] private TextAlert _textAlert;
+        [SerializeField]
+        private TextAlert _textAlert;
 
         [SerializeField]
         private BMenuState[] _states;
@@ -112,7 +113,11 @@ namespace HeroesOfDice.Managers
             }
 
             CombatManager.Instance.Defender = model;
-            CombatManager.Instance.Attacker.UseAbility();
+            //CombatManager.Instance.Attacker.UseAbility();
+            //if (CombatManager.Instance.Attacker.UpSide.Ability.TargetType == ETargetType.Ally)
+            //    CombatManager.Instance.Attacker.UseAbility();
+            //else
+                MoveToState(_states[4]);
         }
 
         public void DisplayMessage(string message, float duration)
@@ -127,7 +132,7 @@ namespace HeroesOfDice.Managers
 
         public void DisplayEndGameMessage(string message)
         {
-           _textAlert.ShowEndMessage(message); 
+            _textAlert.ShowEndMessage(message);
         }
     }
 }

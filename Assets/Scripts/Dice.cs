@@ -38,19 +38,6 @@ namespace HeroesOfDice.GameObjects
             Roll();
 
         }
-
-        // Update is called once per frame
-        public void Update()
-        {
-            if (Input.GetKeyUp(KeyCode.A))
-            {
-                Roll();
-            }
-            else if (Input.GetKeyUp(KeyCode.Space))
-                ShootUp();
-
-        }
-
         //		IEnumerator CheckSidesForCollision (float seconds)
         //		{
         //				yield return new WaitForSeconds (seconds);
