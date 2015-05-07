@@ -13,7 +13,16 @@ public class AbilityPanel : MonoBehaviour
     public void Start()
     {
         //abilityButtons = GetComponentInChildren<RectTransform> ().GetComponentsInChildren<Button> ();
-        buttons = GetComponentInChildren<RectTransform>().GetComponentsInChildren<AbilityButton>();
+        //buttons = GetComponentInChildren<RectTransform>().GetComponentsInChildren<AbilityButton>();
+
+        for (var x = 0; x < 3; x++)
+        {
+            if (panelType == ETargetType.Ally) // If this panel type is the player
+                buttons[x].model = CombatManager.Instance.PlayersModels[x];
+            else
+                buttons[x].model = CombatManager.Instance.EnemysModels[x];
+        }
+
     }
 
     public void OnEnable()
@@ -31,23 +40,33 @@ public class AbilityPanel : MonoBehaviour
     public void AddToView(BDice dice)
     {
         if (dice.TargetType == panelType)
-            for (int x = 0; x < buttons.Length; x++)
-                if (buttons[x].model == null || buttons[x].model == dice)
-                {
-                    buttons[x].SetModel(dice);
+            foreach (var b in buttons)
+                if (b.model == dice)
+                    b.SetModel(dice);
 
-                    break;
-                }
+        //if (dice.TargetType == panelType)
+        //    for (int x = 0; x < buttons.Length; x++)
+        //        if (buttons[x].model == null || buttons[x].model == dice)
+        //        {
+        //            buttons[x].SetModel(dice);
+
+        //            break;
+        //        }
     }
 
     public void RemoveFromView(BDice dice)
     {
-        for (int x = 0; x < buttons.Length; x++)
-            if (buttons[x].model == dice)
-            {
-                buttons[x].Flush();
-                break;
-            }
+        if (dice.TargetType == panelType)
+            foreach (var b in buttons)
+                if (b.model == dice)
+                    b.Flush();
+
+        //for (int x = 0; x < buttons.Length; x++)
+        //    if (buttons[x].model == dice)
+        //    {
+        //        buttons[x].Flush();
+        //        break;
+        //    }
     }
 
 
