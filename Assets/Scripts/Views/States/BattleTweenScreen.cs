@@ -20,6 +20,7 @@ public class BattleTweenScreen : BMenuState
 
     public override void OnEnter()
     {
+        MenuManager.Instance.IsTweening = true;
         HeroShelf.Hide();
         EnemyShelf.Hide();
 
@@ -91,13 +92,13 @@ public class BattleTweenScreen : BMenuState
 
     private void MoveSingleBack()
     {
-        Attacker.DOMove(AttackersRest.position, .5f).OnComplete(MenuManager.Instance.CallGameScreen);
+        Attacker.DOMove(AttackersRest.position, .5f).OnComplete(MenuManager.Instance.HandleEndTween);
     }
 
     private void MoveBack()
     {
         Attacker.DOMove(AttackersRest.position, .5f);
-        Defender.DOMove(DefendersRest.position, .5f).OnComplete(MenuManager.Instance.CallGameScreen);
+        Defender.DOMove(DefendersRest.position, .5f).OnComplete(MenuManager.Instance.HandleEndTween);
     }
 
     public override void OnLeave()
@@ -114,6 +115,8 @@ public class BattleTweenScreen : BMenuState
 
         HeroShelf.Show();
         EnemyShelf.Show();
+
+        MenuManager.Instance.IsTweening = false;
 
         // TODO: Alert the TurnManager to check for end of turn instead of doing it in the combat manager? That way the tween will work effectively
     }
