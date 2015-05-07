@@ -13,7 +13,7 @@ namespace HeroesOfDice.Abilities
 
         public override void Use()
         {
-            BDice[] allies = CombatManager.Instance.PlayersModels;
+            var allies = CombatManager.Instance.ActivePlayerModels;
 
             foreach (BDice dice in allies)
                 dice.ModHealth(CalculatePower());
