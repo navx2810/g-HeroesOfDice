@@ -78,10 +78,10 @@ namespace HeroesOfDice.Managers
 
         private void Roll()
         {
-            foreach(var dice in CombatManager.Instance.PlayersModels)
+            foreach(var dice in CombatManager.Instance.ActivePlayerModels)
                 dice.DiceObject.Roll();
 
-            foreach(var dice in CombatManager.Instance.EnemysModels)
+            foreach(var dice in CombatManager.Instance.ActiveEnemyModels)
                 dice.DiceObject.Roll();
         }
 
