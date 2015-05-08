@@ -130,8 +130,8 @@ namespace HeroesOfDice.Managers
         {
             CallGameScreen();
 
-            if(!TurnManager.Instance.IsPlayersTurn)
-                TurnManager.Instance.AI.DoAction();
+            //if(!TurnManager.Instance.IsPlayersTurn)
+            //    TurnManager.Instance.AI.DoAction();
         }
 
         public void DisplayMessage(string message)
