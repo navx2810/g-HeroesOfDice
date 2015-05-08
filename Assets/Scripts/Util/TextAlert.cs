@@ -22,12 +22,12 @@ public class TextAlert : MonoBehaviour
     {
         _messageQueue.Add(message);
 
-        if (!isShowing) StartCoroutine(ShowText(1f));
+        if (!isShowing) StartCoroutine(ShowText(4f));
     }
 
     public void SetText(string message)
     {
-        SetText(message, 2f);
+        SetText(message, 4f);
     }
 
     public void ShowEndMessage(string message)
@@ -38,14 +38,15 @@ public class TextAlert : MonoBehaviour
 
     IEnumerator ShowText(float duration)
     {
+        isShowing = true;
         while (_messageQueue.Count != 0)
         {
-            a.text = _messageQueue.First();
-            b.text = _messageQueue.First();
+            a.text = _messageQueue.ElementAt(0);
+            b.text = _messageQueue.ElementAt(0);
 
-            _messageQueue.Remove(_messageQueue.First());
+            _messageQueue.Remove(_messageQueue.ElementAt(0));
 
-            yield return new WaitForSeconds(duration);
+            yield return new WaitForSeconds(2f);
         }
 
         a.text = "";
