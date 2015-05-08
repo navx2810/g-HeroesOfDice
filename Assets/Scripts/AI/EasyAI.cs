@@ -21,6 +21,9 @@ public class EasyAI : BAi
         //else if (dice.TargetType == ETargetType.Ally)
         //    CombatManager.Instance.Defender = HelpSheet.Last().Key;
 
+        if(IsPerforming)
+            Debug.LogError("The AI is already executing");
+
         if (!IsPerforming) StartCoroutine(DoActions());
     }
 
@@ -46,39 +49,38 @@ public class EasyAI : BAi
     {
         IsPerforming = true;
         yield return new WaitForSeconds(1f);
-        //while (CombatManager.Instance.EnemyAbilities.Count > 0)
-        for (var x = 0; x < 3; x++)
+        while (CombatManager.Instance.EnemyAbilities.Count > 0)
         {
             while(MenuManager.Instance.IsTweening)
                 yield return new WaitForSeconds(1f);
-
-            if (CombatManager.Instance.EnemyAbilities.Count == 0)
-                break;
 
             BDice dice = CombatManager.Instance.EnemyAbilities.Keys.First();
 
             if (dice.UpSide.Ability.TargetType == ETargetType.None)
             {
                 CombatManager.Instance.EnemyAbilities.Remove(dice);
-                break;
             }
+            else
+            {
 
-            CombatManager.Instance.EnemyAbilities.Remove(dice);
-            PopulateSheets();
-            CombatManager.Instance.Attacker = dice;
+                CombatManager.Instance.EnemyAbilities.Remove(dice);
+                PopulateSheets();
+                CombatManager.Instance.Attacker = dice;
 
-            if (dice.UpSide.Ability.TargetType == ETargetType.Enemy)
-                CombatManager.Instance.Defender = GetOpponent();
-            else if (dice.UpSide.Ability.TargetType == ETargetType.Ally)
-                CombatManager.Instance.Defender = GetFriendly();
+                if (dice.UpSide.Ability.TargetType == ETargetType.Enemy)
+                    CombatManager.Instance.Defender = GetOpponent();
+                else if (dice.UpSide.Ability.TargetType == ETargetType.Ally)
+                    CombatManager.Instance.Defender = GetFriendly();
 
-            MenuManager.Instance.DisplayMessage(String.Format("{0} uses {1} against {2}", dice.Name, dice.UpSide.Ability.Name, CombatManager.Instance.Defender.Name), 1.5f);
-           
-            MenuManager.Instance.MoveToState(4);
-            //CombatManager.Instance.Attacker.UseAbility();
+                MenuManager.Instance.DisplayMessage(
+                    String.Format("{0} uses {1} against {2}", dice.Name, dice.UpSide.Ability.Name,
+                        CombatManager.Instance.Defender.Name), 1.5f);
 
-            yield return new WaitForSeconds(2f + Random.Range(0f, 1f));
+                MenuManager.Instance.MoveToState(4);
+                //CombatManager.Instance.Attacker.UseAbility();
 
+                yield return new WaitForSeconds(2f + Random.Range(0f, 1f));
+            }
             //if (CombatManager.Instance.EnemyAbilities.Count == 0)
             //    break;
         }
