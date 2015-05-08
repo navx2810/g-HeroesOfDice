@@ -17,7 +17,7 @@ public class AbilityButton : MonoBehaviour
 
     public void Flush()
     {
-        model = null;
+        //model = null;
         button.interactable = false;
         abilityName.text = "";
     }
@@ -44,6 +44,5 @@ public class AbilityButton : MonoBehaviour
     {
         TurnManager.Instance.TurnEnding += Flush;
     }
-
 
 }
